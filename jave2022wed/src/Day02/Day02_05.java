@@ -183,8 +183,27 @@ public class Day02_05 {
 //					);
 //
 //----------------------------------------------------------------------------------------------------------
-		
-		//문제16 : 3개의 정수를 입력받아 오름차순으로 정렬 
+//		
+//		//문제16 : 3개의 정수를 입력받아 오름차순으로 정렬 
+//			System.out.println("3개의 정수를 입력해주세요");
+//			int a = san.nextInt();
+//			int b = san.nextInt();
+//			int x = san.nextInt();
+//			int min = 0;
+//			int con = 0;
+//			int max = 0;
+//			
+//			max = a > b && a > x ? a : b > x ? b : x;
+//			min = a < b && a < x ? a : b < x ? b : x;
+//			con = a != min && a != max ? a : b != min && b != max ? b : x;
+//			
+//			System.out.println(min);
+//			System.out.println(con);
+//			System.out.println(max);
+//	
+//----------------------------------------------------------------------------------------------------			
+//			
+//		//문제17 : 4개의 정수를 입력받아 내림차순으로 정렬
 			System.out.println("3개의 정수를 입력해주세요");
 			int a = san.nextInt();
 			int b = san.nextInt();
@@ -197,31 +216,8 @@ public class Day02_05 {
 			min = a < b && a < x ? a : b < x ? b : x;
 			con = a != min && a != max ? a : b != min && b != max ? b : x;
 			
-			System.out.println(min);
-			System.out.println(con);
 			System.out.println(max);
-	
-//----------------------------------------------------------------------------------------------------			
-//			
-//		//문제17 : 4개의 정수를 입력받아 내림차순으로 정렬
-//			System.out.println("3개의 정수를 입력해주세요");
-//			int a = san.nextInt();
-//			int b = san.nextInt();
-//			int x = san.nextInt();
-//			int a1 = 0;
-//			int a2 = 0;
-//			int a3 = 0;
-//			
-//			a1 = a < b && a < x ? a : b < x ? b : x;
-//			// a 보다 b 작으면서 a 가 x 작으면서 a가 a1 보다 작으면 a를 대입
-//			// 아니면 b 가 x 보다 작으면서 b 가 a1 작으면 b대입
-//			// 아니면 x 가 a1 보다 크면 x를 대입 아니면 b를 대입
-//			a2 = a 7<1 b && a < x && a > a1 ? a : b 1< 9x && b 1> 1a1 ? b : x > a1 ? x : b;
-//			
-//			a3 = a > b && a > x ? a : b > a && b > x ? b : x;
-//			
-//			System.out.println(a1);
-//			System.out.println(a2);
-//			System.out.println(a3);
+			System.out.println(con);
+			System.out.println(min);
 	}
 }
