@@ -1,6 +1,6 @@
 package Day03;
 
-public class Day05_05 {
+public class Day03_05 {
 	public static void main(String[] args) {
 		
 		//¹Ýº¹¹® : 1. for  2. while  3. do~while[x]
