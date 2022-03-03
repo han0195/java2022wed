@@ -15,7 +15,8 @@ public class Day03_07 {
 			System.out.println("----------------------------------");
 			System.out.println("1.예금 | 2.출금 | 3.잔고 | 5.4.종료");
 			System.out.println("----------------------------------");
-			System.out.println("선택>"); int 선택 = scanner.nextInt();
+			System.out.println("선택>"); 
+			int 선택 = scanner.nextInt();
 			
 			if( 선택 == 1 ) {// 막약에 입력값이 1이면
 				System.out.println("예금액: "); int 예금액 = scanner.nextInt();
