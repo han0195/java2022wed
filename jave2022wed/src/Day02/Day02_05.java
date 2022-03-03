@@ -186,38 +186,34 @@ public class Day02_05 {
 //		
 //		//문제16 : 3개의 정수를 입력받아 오름차순으로 정렬 
 //			System.out.println("3개의 정수를 입력해주세요");
-//			int a = san.nextInt();
-//			int b = san.nextInt();
-//			int x = san.nextInt();
-//			int min = 0;
-//			int con = 0;
-//			int max = 0;
+//			int a = san.nextInt();	int min = 0;
+//			int b = san.nextInt();	int cen = 0;
+//			int x = san.nextInt();	int max = 0;
+//			
+//			
+//			
 //			
 //			max = a > b && a > x ? a : b > x ? b : x;
 //			min = a < b && a < x ? a : b < x ? b : x;
-//			con = a != min && a != max ? a : b != min && b != max ? b : x;
+//			cen = a != min && a != max ? a : b != min && b != max ? b : x;
 //			
-//			System.out.println(min);
-//			System.out.println(con);
-//			System.out.println(max);
+//			System.out.printf("%d %d %d", min, cen, max);
 //	
 //----------------------------------------------------------------------------------------------------			
 //			
 //		//문제17 : 4개의 정수를 입력받아 내림차순으로 정렬
 			System.out.println("3개의 정수를 입력해주세요");
-			int a = san.nextInt();
-			int b = san.nextInt();
-			int x = san.nextInt();
-			int min = 0;
-			int con = 0;
-			int max = 0;
+			int a = san.nextInt();	int min = 0;
+			int b = san.nextInt();	int cen = 0;
+			int x = san.nextInt();	int max = 0;
+			
+			
+			
 			
 			max = a > b && a > x ? a : b > x ? b : x;
 			min = a < b && a < x ? a : b < x ? b : x;
-			con = a != min && a != max ? a : b != min && b != max ? b : x;
+			cen = a != min && a != max ? a : b != min && b != max ? b : x;
 			
-			System.out.println(max);
-			System.out.println(con);
-			System.out.println(min);
+			System.out.printf("%d %d %d", max, min, cen);
 	}
 }
