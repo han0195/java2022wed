@@ -52,8 +52,13 @@ public class Day05_04_도서_대여 { // c s
 							pass = true;
 							break;
 						}
+					}else {
+						System.out.println("로그인실패");
+						break;
 					}
 				}// 로그인 여부 for e
+				
+				
 				if(id.equals("admin")) {
 					//관리자메뉴 시작
 					if(id.equals("admin")) { // 아이디가 어드민이면
@@ -169,7 +174,9 @@ public class Day05_04_도서_대여 { // c s
 							System.out.println("로그아웃");
 							break;
 						}
-						
+						else{
+							System.out.println("알수없는행동입니다");
+						}
 					} 
 				}
 				
