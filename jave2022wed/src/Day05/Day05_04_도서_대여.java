@@ -36,6 +36,8 @@ public class Day05_04_도서_대여 {
 		String[][] 회원 = new String[100][2];
 		// [0] = id [1] = pw
 		String[][] 도서 = new String[100][3];
+		도서[99][0] = "admin";
+		도서[99][1] = "admin";
 		
 		while(true) {
 			System.out.println("-------------------도서 대여프로그램------------------");
@@ -63,17 +65,54 @@ public class Day05_04_도서_대여 {
 				
 				for(int i = 0; i < 회원.length; i++){//로그인 여부 확인
 					if(id != null && id.equals(회원[i][0])) { // 아이디 여부확인
-						if(pw != null && pw.equals(회원[i][0])) { // 비밀번호 여부확인
+						if(pw != null && pw.equals(회원[i][1])) { // 비밀번호 여부확인
 							pass = true;
 							break;
 						}
 					}
-				}// for e
+				}// 로그인 여부 for e
 				
-				if(pass == true) {
+				while(pass) {
 					System.out.println("로그인성공");
+					System.out.println("-----------------------------메뉴-----------------------");
+					System.out.println("1.도서검색 2.도서목록 3.도서대여 4.도서반납 5.로그아웃"); int 메뉴선택 = scanner.nextInt();
 					
-				}else {
+					if(메뉴선택 == 1) {
+						System.out.println("도서이름을 입력해주세요: ");	String 도서검색 = scanner.next();  
+						for(int i = 0; i < 도서.length; i++) {
+							if(도서[i][0].equals(도서검색)) {
+								System.out.println("------------------------검색 도서------------------------");
+								System.out.println("도서명\t도서 대여 여부\t대여인");
+								System.out.println(도서[i][0] + 도서[i][1] + 도서[i][2]);
+								break;
+							}
+						}// 도서 찾기 for e
+					}// 도서검색 if e
+					else if(메뉴선택 == 2) {
+						System.out.println("------------------------도서 목록------------------------");
+						for(int i = 0; i < 도서.length; i++) {
+							if(도서[i][0] != null) {
+								System.out.println("도서명\t도서 대여 여부\t대여인");
+								System.out.println(도서[i][0] + 도서[i][1] + 도서[i][2]);
+							}else {
+								System.out.println("에러)) 현재 보유중인 도서가 없습니다");
+							}//if e
+						}
+					}// 도서 찾기 반복문 e
+					else if(메뉴선택 == 3) {
+						
+					}
+					else if(메뉴선택 == 4) {}
+					else if(메뉴선택 == 5) {}
+					else {}
+				}
+				// 로그인성공 if e
+				if(회원[99][0].equals("admin")) {
+					/*
+					 * 형꺼
+					 */
+				}// admin 로그인 if e 
+				else{
 					System.out.println("로그인실패");
 				}
 				
