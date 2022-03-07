@@ -90,8 +90,16 @@ public class Day05_04_도서_대여 { // c s
 								} // 찾은도서가 있는지
 							}
 						}
-						else if(메뉴선택 == 4) {// 도서 반납
-							
+						if (메뉴선택 == 4) { // 도서 반납
+							System.out.println("-------도서 반납-------");
+							System.out.println("반납할 도서 : "); String 반납도서 = scanner.next();
+							for (int i = 0; i<도서.length; i++) { // 도서 목록만큼 for 반복실행
+								if (도서[i][0].equals(반납도서)) { // 만약 입력한 반납도서가 도서 이름과 같다면
+									if(도서[i][1].equals("1")) { // 만약 입력한 반납도서가 대여 중이라면
+										도서[i][1] = "0"; // 대여여부 변수를 0으로 변경
+									}
+								}
+							}
 						}
 						else if(메뉴선택 == 5) {
 							System.out.println("로그아웃");
