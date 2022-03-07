@@ -35,7 +35,7 @@ public class Day05_04_도서_대여 {
 		
 		String[][] 회원 = new String[100][2];
 		// [0] = id [1] = pw
-		string[][] 도서 = new String[100][3];
+		String[][] 도서 = new String[100][3];
 		
 		while(true) {
 			System.out.println("-------------------도서 대여프로그램------------------");
@@ -52,29 +52,35 @@ public class Day05_04_도서_대여 {
 					회원[i][0] = id; //아디입력
 					회원[i][1] = pw; //비번입력
 					break; // 탈출
+				}
 			}
 			else if(선택 == 2) { // 로그인
 				System.out.println("-----------------로그인-----------------------");
-				System.out.println("아이디: "); String id = null;
-				System.out.println("비밀번호: "); String pw = null;
+				System.out.println("아이디: "); String id = scanner.next();
+				System.out.println("비밀번호: "); String pw = scanner.next();
 				
-				Boolean pass = true; // 성공여부 판단
+				Boolean pass = false; // 성공여부 판단
 				
 				for(int i = 0; i < 회원.length; i++){//로그인 여부 확인
-					if(id == 회원[i][0]) { // 아이디 여부확인
-						if(pw == 회원[i][1]) { // 비밀번호 여부확인
-							
-						}else {
-							System.out.println("에러)) 비밀번호가 일치하지않습니다");
-						}// 비밀번호 if e
-					}else {
-						System.out.println("에러)) 아이디가 존재하지않습니다");
-					}// id if d
+					if(id != null && id.equals(회원[i][0])) { // 아이디 여부확인
+						if(pw != null && pw.equals(회원[i][0])) { // 비밀번호 여부확인
+							pass = true;
+							break;
+						}
+					}
 				}// for e
+				
+				if(pass == true) {
+					System.out.println("로그인성공");
+					
+				}else {
+					System.out.println("로그인실패");
+				}
 				
 			}else { 
 				System.out.println("에러) 알수없는 행동입니다");
-			}
+			}// 로그인 성공여부 체크 if e
+			
 			
 			
 			
