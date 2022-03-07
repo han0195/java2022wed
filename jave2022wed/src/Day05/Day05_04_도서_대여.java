@@ -15,24 +15,26 @@ public class Day05_04_도서_대여 { // c s
 		
 		회원[99][0] = "admin";
 		회원[99][1] = "1234";
-		//테스트
-		회원[98][0] = "1234";
-		회원[97][1] = "1234";
-		도서[99][0] = "1234";
+	
 		while(true) {//메인메뉴
 			System.out.println(" ---------메인 메뉴 ----------");
 			System.out.println(" 1. 회원가입 2. 로그인 "); int 선택 = scanner.nextInt();
 			if(선택==1 ) { //회원가입 선택시
-				System.out.println("아이디를 입력해주세요 : "); String id = scanner.next();
+				System.out.println("아이디를 입력해주세요 : "); String id = scanner.next();	
 				System.out.println("비밀번호를 입력해주세요 : "); String pw = scanner.next();
-				for(int i = 0; i<회원.length; i++) { // 반복 실행
-					if (회원[i][0] != null && 회원[i][0].equals(id)) { //중복체크
-						System.out.println("중복되는 아이디입니다.");
-					}
-					회원[i][0] = id; //아디입력
-					회원[i][1] = pw; //비번입력
-					break; // 탈출
-				}	
+				if(id.equals("admin")) {
+					System.out.println("넘보지마");
+				}else {
+					for(int i = 0; i<회원.length; i++) { // 반복 실행
+						if (회원[i][0] != null && 회원[i][0].equals(id)) { //중복체크
+							System.out.println("중복되는 아이디입니다.");
+						}
+						회원[i][0] = id; //아디입력
+						회원[i][1] = pw; //비번입력
+						break; // 탈출
+					}	
+				}
+				
 			} // 회원가입 끝
 			
 			
@@ -44,6 +46,7 @@ public class Day05_04_도서_대여 { // c s
 				Boolean pass = false; // 성공여부 판단
 				
 				for(int i = 0; i < 회원.length; i++){//로그인 여부 확인
+					
 					if(id != null && id.equals(회원[i][0])) { // 아이디 여부확인
 						if(pw != null && pw.equals(회원[i][1])) { // 비밀번호 여부확인
 							pass = true;
@@ -51,10 +54,55 @@ public class Day05_04_도서_대여 { // c s
 						}
 					}
 				}// 로그인 여부 for e
-				
-				if(pass == true) {System.out.println("로그인성공");}
-				while(pass){
-					if(pass == true && id!="admin") {
+				if(id.equals("admin")) {
+					//관리자메뉴 시작
+					if(id.equals("admin")) { // 아이디가 어드민이면
+						while(true) {
+						System.out.println("----관리자메뉴----");
+						System.out.println("1. 도서등록 2. 도서목록 3. 도서삭제 4. 로그아웃"); int 관리자선택 = scanner.nextInt();
+						if (관리자선택 == 1) { // 등록 start
+							System.out.println("등록할 도서 이름 : "); String 제목 = scanner.next();
+							for(int j = 0; j<100; j++) {// j를 1부터 100까지 반복 대입 실행
+								if (도서[j][0]==null) {// 도서 배열에서 제목이 빈 칸이라면
+									(도서[j][0]) = 제목;}
+									else if (도서[j][0]!=(null)) {//제목이 빈 칸이 아니면
+										(도서[j+1][0])=제목;
+									}
+									break;
+								
+								
+							} // for end
+							
+						}// 등록 end
+						if (관리자선택 == 2) { // 목록 start
+							System.out.println("------------------------도서 목록------------------------");
+							for(int i = 0; i < 도서.length; i++) {
+								if(도서[i][0] != null) {
+									System.out.println("도서명\t도서 대여 여부\t대여인");
+									System.out.println(도서[i][0] + 도서[i][1] + 도서[i][2]);
+								
+								}//if e
+							}
+						}// 도서 찾기 반복문 e
+						if (관리자선택 == 3) { // 삭제 start
+							System.out.println("삭제할 도서명 입력 : "); String 삭제도서명 = scanner.next();
+							for(int i = 0; i<도서.length; i++) {
+								if(도서[i][0]!=null) {
+									if (도서[i][0].equals(삭제도서명)) {
+										도서[i][0]=null;
+									}
+								}
+							}
+						} // 삭제 end
+						if (관리자선택 == 4) {
+							pass = false;
+							break;
+						}
+					}
+				}//관리자메뉴 end
+				}
+				while(pass && id !="admin"){
+					if(pass == true && id !="admin") {
 				
 						System.out.println("-----------------------------메뉴-----------------------");
 						System.out.println("1.도서검색 2.도서목록 3.도서대여 4.도서반납 5.로그아웃"); int 메뉴선택 = scanner.nextInt();
@@ -124,50 +172,7 @@ public class Day05_04_도서_대여 { // c s
 						
 					} 
 				}
-				//관리자메뉴 시작
-				if(id.equals("admin")) { // 아이디가 어드민이면
-					while(true) {
-					System.out.println("----관리자메뉴----");
-					System.out.println("1. 도서등록 2. 도서목록 3. 도서삭제 4. 로그아웃"); int 관리자선택 = scanner.nextInt();
-					if (관리자선택 == 1) { // 등록 start
-						System.out.println("등록할 도서 이름 : "); String 제목 = scanner.next();
-						for(int j = 0; j<100; j++) {// j를 1부터 100까지 반복 대입 실행
-							if (도서[j][0]==null) {// 도서 배열에서 제목이 빈 칸이라면
-								(도서[j][0]) = 제목;}
-								else if (도서[j][0]!=(null)) {//제목이 빈 칸이 아니면
-									(도서[j+1][0])=제목;
-								}
-								break;
-							
-							
-						} // for end
-						
-					}// 등록 end
-					if (관리자선택 == 2) { // 목록 start
-						System.out.println("------------------------도서 목록------------------------");
-						for(int i = 0; i < 도서.length; i++) {
-							if(도서[i][0] != null) {
-								System.out.println("도서명\t도서 대여 여부\t대여인");
-								System.out.println(도서[i][0] + 도서[i][1] + 도서[i][2]);
-							
-							}//if e
-						}
-					}// 도서 찾기 반복문 e
-					if (관리자선택 == 3) { // 삭제 start
-						System.out.println("삭제할 도서명 입력 : "); String 삭제도서명 = scanner.next();
-						for(int i = 0; i<도서.length; i++) {
-							if(도서[i][0]!=null) {
-								if (도서[i][0].equals(삭제도서명)) {
-									도서[i][0]=null;
-								}
-							}
-						}
-					} // 삭제 end
-					if (관리자선택 == 4) {
-						break;
-					}
-				}
-			}//관리자메뉴 end
+				
 				
 		}//로그인 end
 			else { 
