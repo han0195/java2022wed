@@ -52,10 +52,10 @@ public class Day05_04_도서_대여 { // c s
 					}
 				}// 로그인 여부 for e
 				
-				
+				if(pass == true) {System.out.println("로그인성공");}
 				while(pass){
 					if(pass == true && id!="admin") {
-						System.out.println("로그인성공"); 
+				
 						System.out.println("-----------------------------메뉴-----------------------");
 						System.out.println("1.도서검색 2.도서목록 3.도서대여 4.도서반납 5.로그아웃"); int 메뉴선택 = scanner.nextInt();
 						
@@ -65,7 +65,7 @@ public class Day05_04_도서_대여 { // c s
 								if(도서[i][0].equals(도서검색)) {
 									System.out.println("------------------------검색 도서------------------------");
 									System.out.println("도서명\t도서 대여 여부\t대여인");
-									System.out.println(도서[i][0] + 도서[i][1] + 도서[i][2]);
+									System.out.println(도서[i][0]+ "\t" + 도서[i][1]+ "\t" + 도서[i][2]);
 									break;
 								}
 							}// 도서 찾기 for e
@@ -75,7 +75,7 @@ public class Day05_04_도서_대여 { // c s
 							for(int i = 0; i < 도서.length; i++) {
 								if(도서[i][0] != null) {
 									System.out.println("도서명\t도서 대여 여부\t대여인");
-									System.out.println(도서[i][0] + 도서[i][1] + 도서[i][2]);
+									System.out.println(도서[i][0]+ "\t" + 도서[i][1]+ "\t" + 도서[i][2]);
 								}
 							}
 						}// 도서 찾기 반복문 e
@@ -86,17 +86,33 @@ public class Day05_04_도서_대여 { // c s
 							for(int i = 0; i < 도서.length; i++) {
 								메뉴3여부 = false;
 								if(도서[i][0] != null && 도서[i][0].equals(도서명)) { // 찾은도서가 있는지
-									System.out.println("찾았습닏다");//테스트
+									if(도서[i][1] == null) {
+										System.out.println("도서를 대여하겠습니다까? 네 or 아니요"); String 선택3 = scanner.next();
+										if(선택3.equals("네")) {
+											System.out.println("대여가 성공하였습니다");
+											도서[i][1] = "1";
+											도서[i][2] = id;
+										}else if(선택3.equals("아니요")) {
+											System.out.println("대여가 취소되었습니다");
+											break;
+										}
+									}
 								} // 찾은도서가 있는지
 							}
-						}
+						} //대여 e
 						if (메뉴선택 == 4) { // 도서 반납
 							System.out.println("-------도서 반납-------");
 							System.out.println("반납할 도서 : "); String 반납도서 = scanner.next();
 							for (int i = 0; i<도서.length; i++) { // 도서 목록만큼 for 반복실행
-								if (도서[i][0].equals(반납도서)) { // 만약 입력한 반납도서가 도서 이름과 같다면
+								if (도서[i][0] != null && 도서[i][0].equals(반납도서)) { // 만약 입력한 반납도서가 도서 이름과 같다면
 									if(도서[i][1].equals("1")) { // 만약 입력한 반납도서가 대여 중이라면
-										도서[i][1] = "0"; // 대여여부 변수를 0으로 변경
+										도서[i][1] = null; // 대여여부 변수를 null로 변경
+										도서[i][2] = null;
+										System.out.println("반납에 성공했습니다.");
+									}
+									else if(도서[i][1]==null) {
+										System.out.println("대여하지 않았습니다.");
+										break;
 									}
 								}
 							}
