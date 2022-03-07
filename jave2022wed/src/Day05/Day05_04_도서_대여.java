@@ -3,7 +3,30 @@ package Day05;
 import java.util.Scanner;
 
 public class Day05_04_도서_대여 { // c s
-
+	/*
+	 *  1.입출력 2.변수/자료형/연산 3.제어/반복 4.제어/반복 5.배열
+	 *  
+	 *  도서 대여 console프로그램
+	 *  1. 배열 변수
+	 *  	1.회원 [아이디(중복x), 비밀번호]
+	 *  	2.도서 [도서명(중복x), 도서대여여부, 대여인(로그인시 아이디)]
+	 *  2. 초기메뉴
+	 * 		1.회원가입 2.로그인 
+	 * 				1.회원가입시 아이디 중복체크
+	 * 	3.로그인시 메뉴
+	 * 		1.도서검색 2.도서목록 3.도서대여 4.도서반납 5.로그아웃
+	 * 		2.도서목록시 모든 도서명 출력
+	 * 		3.도서대여시 도서대여여부가 가능할때 도서대여
+	 *  	4.도서반납시 본인이 대여한 도서만 반납 처리
+	 * 		5.로그아웃
+	 *  
+	 *  4.로그인시 아이디가 admin 이면 관리자메뉴
+	 *  	1.도서등록 2.도서목록 3.도서삭제(도전) 4.로그아웃
+	 *  			1.도서등록시 도서명을 입력받아 도서 등록처리
+	 *  			2.도서목록시 모든 도서명 출력
+	 *  			3.도서삭제시 삭제할 도서명을 입력받아 동일한 도서명 삭제[null]
+	 *  			4.로그아웃시 초기메뉴로 				
+	 */ 
 	public static void main(String[] args) { // m s
 		
 		Scanner scanner = new Scanner(System.in); // 스캐너 선언
@@ -52,12 +75,9 @@ public class Day05_04_도서_대여 { // c s
 							pass = true;
 							break;
 						}
-					}else {
-						System.out.println("로그인실패");
-						break;
 					}
 				}// 로그인 여부 for e
-				
+				if(pass == false) {System.out.println("로그인실패");} // 로그인 실패시 출력할꺼
 				
 				if(id.equals("admin")) {
 					//관리자메뉴 시작
@@ -67,15 +87,13 @@ public class Day05_04_도서_대여 { // c s
 						System.out.println("1. 도서등록 2. 도서목록 3. 도서삭제 4. 로그아웃"); int 관리자선택 = scanner.nextInt();
 						if (관리자선택 == 1) { // 등록 start
 							System.out.println("등록할 도서 이름 : "); String 제목 = scanner.next();
+					
 							for(int j = 0; j<100; j++) {// j를 1부터 100까지 반복 대입 실행
-								if (도서[j][0]==null) {// 도서 배열에서 제목이 빈 칸이라면
-									(도서[j][0]) = 제목;}
-									else if (도서[j][0]!=(null)) {//제목이 빈 칸이 아니면
-										(도서[j+1][0])=제목;
-									}
+								if (도서[j][0] == null) {// 도서 배열에서 제목이 빈 칸이라면
+									도서[j][0] = 제목;
 									break;
-								
-								
+									}
+											
 							} // for end
 							
 						}// 등록 end
@@ -84,7 +102,7 @@ public class Day05_04_도서_대여 { // c s
 							for(int i = 0; i < 도서.length; i++) {
 								if(도서[i][0] != null) {
 									System.out.println("도서명\t도서 대여 여부\t대여인");
-									System.out.println(도서[i][0] + 도서[i][1] + 도서[i][2]);
+									System.out.println(도서[i][0]+ "\t" + 도서[i][1]+ "\t" + 도서[i][2]);
 								
 								}//if e
 							}
@@ -95,6 +113,8 @@ public class Day05_04_도서_대여 { // c s
 								if(도서[i][0]!=null) {
 									if (도서[i][0].equals(삭제도서명)) {
 										도서[i][0]=null;
+										도서[i][1]=null;
+										도서[i][2]=null;
 									}
 								}
 							}
@@ -173,9 +193,6 @@ public class Day05_04_도서_대여 { // c s
 						else if(메뉴선택 == 5) {
 							System.out.println("로그아웃");
 							break;
-						}
-						else{
-							System.out.println("알수없는행동입니다");
 						}
 					} 
 				}
