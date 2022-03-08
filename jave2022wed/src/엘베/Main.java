@@ -23,14 +23,14 @@ public class Main {
 			System.out.println("현재몇층입니까? 1~20: "); int 호출층수 = scanner.nextInt(); // 현재 층수 입력받기
 			
 			boolean 도착여부 = false; // 엘베 도착 여부
-			if(elevator.층수 != 호출층수) {// 같은층수가 아니면
+			if(elevator.층수 != 호출층수 && 호출층수 > 0 && 호출층수 < 20) {// 같은층수가 아니면
 				if(호출층수 < elevator.층수) {// 호출층수 보다 엘베위치가 높으면
 					while(true) {// 엘베 가동 시작
 						elevator.층수--;// 엘베가 내려가면서 하나씩 내려가기
 						System.out.println(elevator.층수 + "층");
 						if(호출층수 == elevator.층수) { // 엘베가 같은층이되면
 							System.out.println("도착");
-							도착여부 = true;
+							도착여부 = true;			// 엘베가 정상적으로 도착했으면 도착여부 true;
 							break; 					// 중지
 						}// 같은층이면 end
 					}// 엘베가동 end	
@@ -40,13 +40,13 @@ public class Main {
 						System.out.println(elevator.층수 + "층");
 						if(호출층수 == elevator.층수) { // 엘베가 같은층이되면
 							System.out.println("도착");
-							도착여부 = true;
+							도착여부 = true;			// 엘베가 정상적으로 도착했으면 도착여부 true;
 							break; 					// 중지
 						}// 같은층이면 end
 					}// 엘베가동 end	
 				}					
 				
-			}else if(호출층수 < 0 && 호출층수 > 20) { // 범위에서 벗어나면
+			}else { // 범위에서 벗어나면
 				System.out.println("에러)) 1~20층 까지 입력해주세요");
 			}
 			
@@ -56,23 +56,32 @@ public class Main {
 				if(목적층수 >= 1 && 목적층수 <= 20) {// 범주안일때
 					if(elevator.층수 < 목적층수) {// 엘베층수보다 목적층수가 높을때
 						System.out.println("올라갑니다");
-						while(true) {
-							elevator.층수++;
-							if(elevator.층수 == 목적층수) {
+						while(true) { // 엘베 가동시작 
+							elevator.층수++; // 엘베 한층식 올라가기
+							System.out.println(elevator.층수 + "층");
+							if(elevator.층수 == 목적층수) {//엘베가 도착했을때
 								System.out.println("도착했습니다");
-								break;
+								break;// 반복문 종료
 							}
-						}// while end
-					}//else if() {// 엘베층수보다 목적층수가 낮을때
-						
-					
-				}else {// 범주가 벗었났을때
-					
+						} //while end
+					}else if(elevator.층수 > 목적층수) {//엘베층수보다 목적층수가 높을때
+						System.out.println("내려갑니다");
+						while(true) { // 엘베 가동시작 
+							elevator.층수--; // 엘베 한층식 올라가기
+							System.out.println(elevator.층수 + "층");
+							if(elevator.층수 == 목적층수) {//엘베가 도착했을때
+								System.out.println("도착했습니다");
+								break;// 반복문 종료
+							}		
+						}
+					}
+				}else {// 목적층수 범주가 벗었났을때
+					System.out.println("에러)) 1~20층 까지 입력해주세요");
 				}
 				
 				
 			}
-			System.out.println(elevator.층수);
+			System.out.println("현재엘베 층수: " + elevator.층수);
 		}// while
 	}// me
 }// cs
