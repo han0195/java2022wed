@@ -2,8 +2,10 @@ package 엘베;
 
 import java.util.Scanner;
 
-public class Main {
-	/* 참고횟수: 
+public class Main {	
+	/* 참고횟수: 0
+	 * 예외 설정 고치기 다했음 지우기[범위를 벗었났는데도 범위변한 코드안뜸]
+	 * 
 	 * 
 	 * 1.엘리베이터 객체 생성
 	 * 		1.층수
