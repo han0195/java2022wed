@@ -25,7 +25,7 @@ public class Main {
 			System.out.println("현재몇층입니까? 1~20: "); int 호출층수 = scanner.nextInt(); // 현재 층수 입력받기
 			
 			boolean 도착여부 = false; // 엘베 도착 여부
-			if(elevator.층수 != 호출층수 && 호출층수 > 0 && 호출층수 < 20) {// 같은층수가 아니면
+			if(elevator.층수 != 호출층수 && 호출층수 > 0 && 호출층수 <= 20) {// 같은층수가 아니면
 				if(호출층수 < elevator.층수) {// 호출층수 보다 엘베위치가 높으면
 					while(true) {// 엘베 가동 시작
 						elevator.층수--;// 엘베가 내려가면서 하나씩 내려가기
@@ -45,15 +45,19 @@ public class Main {
 							도착여부 = true;			// 엘베가 정상적으로 도착했으면 도착여부 true;
 							break; 					// 중지
 						}// 같은층이면 end
-					}// 엘베가동 end	
+					}// 엘베가동 end
 				}					
 				
-			}else { // 범위에서 벗어나면
+			}else if(elevator.층수 == 호출층수) { // 층수가같을때
+				System.out.println("같은 층입니다");
+				도착여부 = true;
+			}
+			else { // 범위에서 벗어나면
 				System.out.println("에러)) 1~20층 까지 입력해주세요");
 			}
 			
 			
-			if(도착여부 == true){// 층수가 같으면
+			if(도착여부 == true){ // 층수가 같으면
 				System.out.println("몇층의 가겠습니까?: "); int 목적층수 = scanner.nextInt(); // 목적층수 입력받기
 				if(목적층수 >= 1 && 목적층수 <= 20) {// 범주안일때
 					if(elevator.층수 < 목적층수) {// 엘베층수보다 목적층수가 높을때
