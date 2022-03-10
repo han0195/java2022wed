@@ -18,7 +18,7 @@ public class Main {
 		
 		Scanner scanner = new Scanner(System.in);// 입력객체 선언
 		
-		Elevator elevator = new Elevator(10);// 처음 기본값 1 인자 선언
+		Elevator elevator = new Elevator(10);// 처음 기본값 10 인자 선언 => 10층
 		
 		while (true) {
 			System.out.println("-----------------------------------엘리베이터-------------------------------------------");
