@@ -9,8 +9,6 @@ public class Member {
 	private String pw;
 	private String name;
 	private String phone;
-	Bank bank = new Bank();
-	Long logn = new Long();
 	//2.持失切
 	public Member() {// 朔持失切持失
 		

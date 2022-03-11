@@ -10,7 +10,23 @@ public class Bank { // c s
 	private String id;
 	//생성자
 	
-		//빈 생성자
+		public int getMoney() {
+		return money;
+	}
+
+	public void setMoney(int money) {
+		this.money = money;
+	}
+
+	public String getbPw() {
+		return bPw;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	//빈 생성자
 	public Bank() {}
 	
 		//[필드 2개] 생성자
@@ -32,6 +48,12 @@ public class Bank { // c s
 		System.out.println("-----계좌 생성 페이지-----");
 		System.out.println("이름을 입력해주세요 : "); String name = Day08_05.scanner.next();
 		System.out.println("비밀번호를 입력해주세요 : "); String pw = Day08_05.scanner.next();
+		// 비밀번호
+		if(pw.equals(result[3]) == false) {
+			System.out.println("비밀번호가 일치하지 않습니다");
+			return;
+		}
+		
 		 // for s
 		int j = 0;
 		for(Bank temp : Day08_05.bank) {
@@ -39,6 +61,7 @@ public class Bank { // c s
 				if( j == 0) {bNum = 1;}  // 첫 회원은 1번 지정(안하면 밑에서 -1 인덱스 참조해서 오류)
 				else bNum=Day08_05.bank[j-1].bNum +1; break;
 			}		// null 바로 앞 회원[마지막 회원] 번호에 +1
+			j++;
 		}
 				//회원번호 부여 끝
 		id = result[0];
@@ -49,6 +72,7 @@ public class Bank { // c s
 		int i = 0; for(Bank temp :Day08_05.bank) { // 회원저장 s
 			if ( temp == null ) { // 비어있으면
 				Day08_05.bank[i] = bank; System.out.println(" 계좌 생성이 완료되었습니다. ");
+				System.out.println("계좌번호 : "+bNum);
 				return;}
 			i++;}
 				System.out.println("계좌 생성 실패");
@@ -57,6 +81,13 @@ public class Bank { // c s
 		//	- 2. 입금
 	void 입금(String[] result) { // 입금 s
 		System.out.println(" 입금 페이지 ");
+//		System.out.println(" 입금할통장 번호을 입력해주세요: "); int name = Day08_05.scanner.nextInt();
+//		for(Bank temp : Day08_05.bank) {// 둘러보기 // 해볼라했는데 안됨
+//			if(temp.bNum != name) {
+//				System.out.println("해당계좌가 없습니다");
+//				return;
+//			}
+//		}
 		System.out.println(" 비밀번호를 입력해주세요 :"); String pw = Day08_05.scanner.next();
 		System.out.println(" 금액을 넣어주세요 "); int money = Day08_05.scanner.nextInt();
 		for ( Bank temp : Day08_05.bank) {
@@ -70,6 +101,13 @@ public class Bank { // c s
 		//	- 3. 출금
 	void 출금(String[] result) { // 출금 s
 		System.out.println(" 출금 페이지 ");
+//		System.out.println(" 출금할 계좌이름을 입력해주세요: "); int name = Day08_05.scanner.nextInt();
+//		for(Bank temp : Day08_05.bank) {// 둘러보기 //해볼라했는데 안됨
+//			if(temp.bNum != name) {
+//				System.out.println("해당계좌가 없습니다");
+//				return;
+//			}
+//		}
 		System.out.println(" 비밀번호를 입력해주세요 : "); String pw = Day08_05.scanner.next();
 		System.out.println(" 출금할 금액을 입력해주세요 "); int money = Day08_05.scanner.nextInt();
 		if ( money > 0) { // 금액이 양수면
@@ -107,9 +145,8 @@ public class Bank { // c s
 			System.out.println("---당신의 계좌 목록---");
 			for(Bank temp : Day08_05.bank) {
 				if(temp != null && temp.id.equals(id)) {
-					System.out.println(temp.bNum+ "번 통장에" + temp.money + "원이 있습니다.");
+					System.out.println("통장"+temp.bNum+ "번에" + temp.money + "원이 있습니다.");
 				}
 			}
 		}
 } // c e
-

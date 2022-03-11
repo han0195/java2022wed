@@ -66,6 +66,7 @@ public class Day08_05 {
 		while (true) {
 			System.out.println("---------------------------모바일 뱅크 프로그램---------------------------");
 			System.out.println("1.계좌생성 2.입금 3.출금 4.이체 5.대출 6.계좌목록"); int ch = scanner.nextInt();
+			Long longs = new Long();
 			if(ch == 1) {// 1.계좌생성
 				banks.계좌생성(result);
 			}else if(ch == 2){// 2.입금
@@ -75,13 +76,13 @@ public class Day08_05 {
 			}else if(ch == 4){// 4.이체
 				banks.이체(result);
 			}else if(ch == 5){// 5.대출
-				
+				login_menus(result);
 			}else if(ch == 6){// 6.계좌목록
 				banks.계좌목록(result);
 			}else if(ch == 7){// 7.로그아웃
 				break;
 			}else {// 그외
-				
+				System.out.println("알수없는행동");
 			}
 		}// while end
 	}// 로그인 메뉴 end
@@ -96,7 +97,7 @@ public class Day08_05 {
 			}else if(ch == 2) { // 대출상환
 				longs.Repayment(result);
 			}else if(ch == 3) {// 남은대출금
-				
+				longs.LoanAmount(result);
 			}else if(ch == 4) {// 뒤로가기
 				break;
 			}else {//그외
