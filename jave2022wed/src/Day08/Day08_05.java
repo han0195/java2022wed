@@ -40,12 +40,12 @@ public class Day08_05 {
 					System.out.println("실패 환영합니다");
 				}
 			}else if(ch == 2){// 2.로그인
-				String result = member.iogin();
+				String[] result = member.iogin();
 				if(result == null) {
 					System.out.println("로그인실패 일치하는 회원이 없습니다");
 				}else {//로그인성공
 					System.out.println("로그인성공");
-					login_menu();
+					login_menu(result);
 				}
 			}else if(ch == 3){// 3.아이디찾기
 				member.idfind();
@@ -58,7 +58,7 @@ public class Day08_05 {
 		}//while end
 	}// 초기메뉴 종료
 	
-	void login_menu() {// 로그인메뉴
+	void login_menu(String[] result) {// 로그인메뉴
 		while (true) {
 			System.out.println("---------------------------모바일 뱅크 프로그램---------------------------");
 			System.out.println("1.계좌생성 2.입금 3.출금 4.이체 5.대출 6.계좌목록"); int ch = scanner.nextInt();

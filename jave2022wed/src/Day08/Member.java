@@ -67,14 +67,15 @@ public class Member {
 		return false;		
 	}
 	//2.로그인
-	public String iogin() {
+	public String[] iogin() {
 		System.out.println("-----------------------------로그인 페이지----------------------------------");
 		System.out.println("아이디: "); 	String id = Day08_05.scanner.next();
 		System.out.println("비밀번호: ");	String pw = Day08_05.scanner.next();
 
 		for(Member temp : Day08_05.member) { // 로그인 체크
 			if(temp != null && temp.id.equals(id) && temp.pw.equals(pw)) {// 아이디 일치 비밀번호일치
-				return id;
+				String[] t = {temp.id, temp.name, temp.phone};
+				return t;
 			}else {
 				return null;
 			}
