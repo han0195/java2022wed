@@ -54,7 +54,18 @@ public class Long {
 			
 		}//대출가입 end
 		//대출상환
-		public void Repayment() {
+		public void Repayment(String[] resul) {
+			System.out.println("---------------------대출 상환 메뉴-------------------------");
+			//중복확인
+			System.out.println("현재 대출중인 통장");
+			System.out.println("이름\t금액\t소유인");
+			for(Long temp : Day08_05.longs) {
+				if(temp != null && temp.id.equals(resul[0])) {
+					System.out.println(temp.name+"\t"+temp.balance+"\t"+temp.id);
+					return;
+				}
+			}
+			
 			
 			
 		}

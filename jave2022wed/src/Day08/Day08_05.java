@@ -21,6 +21,7 @@ public class Day08_05 {
 	static Scanner scanner = new Scanner(System.in);
 	static Member[] member = new Member[100];// 저장할 배열선언
 	static Bank[] bank = new Bank[100];// 저장할 배열선언
+	Bank banks = new Bank();
 	static Long[] longs = new Long[100];// 대출통장관리
 	
 	
@@ -66,19 +67,19 @@ public class Day08_05 {
 			System.out.println("---------------------------모바일 뱅크 프로그램---------------------------");
 			System.out.println("1.계좌생성 2.입금 3.출금 4.이체 5.대출 6.계좌목록"); int ch = scanner.nextInt();
 			if(ch == 1) {// 1.계좌생성
-				
+				banks.계좌생성(result);
 			}else if(ch == 2){// 2.입금
-				
+				banks.입금(result);
 			}else if(ch == 3){// 3.출금
-				
+				banks.출금(result);
 			}else if(ch == 4){// 4.이체
-				
+				banks.이체(result);
 			}else if(ch == 5){// 5.대출
-				login_menus(result);
+				
 			}else if(ch == 6){// 6.계좌목록
-				
-			}else if(ch == 7){// 6.로그아웃
-				
+				banks.계좌목록(result);
+			}else if(ch == 7){// 7.로그아웃
+				break;
 			}else {// 그외
 				
 			}
@@ -93,7 +94,7 @@ public class Day08_05 {
 			if(ch == 1) {// 대출가입
 				longs.Management(result);
 			}else if(ch == 2) { // 대출상환
-				
+				longs.Repayment(result);
 			}else if(ch == 3) {// 남은대출금
 				
 			}else if(ch == 4) {// 뒤로가기
