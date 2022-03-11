@@ -9,7 +9,8 @@ public class Member {
 	private String pw;
 	private String name;
 	private String phone;
-	Bank bank;
+	Bank bank = new Bank();
+	Long logn = new Long();
 	//2.생성자
 	public Member() {// 빈생성자생성
 		
@@ -75,7 +76,7 @@ public class Member {
 
 		for(Member temp : Day08_05.member) { // 로그인 체크
 			if(temp != null && temp.id.equals(id) && temp.pw.equals(pw)) {// 아이디 일치 비밀번호일치
-				String[] t = {temp.id, temp.name, temp.bno + ""};
+				String[] t = {temp.id, temp.name, temp.bno + "", temp.pw};
 				return t;
 			}else {
 				return null;
