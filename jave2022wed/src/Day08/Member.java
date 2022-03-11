@@ -74,10 +74,8 @@ public class Member {
 
 		for(Member temp : Day08_05.member) { // 로그인 체크
 			if(temp != null && temp.id.equals(id) && temp.pw.equals(pw)) {// 아이디 일치 비밀번호일치
-				System.out.println("로그인성공");
 				return id;
 			}else {
-				System.out.println("로그인실패 일치하는 회원이 없습니다");
 				return null;
 			}
 		}// 로그인 체크 end
@@ -85,13 +83,33 @@ public class Member {
 	}
 	
 	//3.아이디찾기
-	public String idfind () {
-		return"아이디";
+	public void idfind () {
+		System.out.println("-----------------------------아이디 찾기--------------------------------");
+		System.out.println("이름: "); 		String name = Day08_05.scanner.next();
+		System.out.println("전화번호: ");		String phone = Day08_05.scanner.next();
+		
+		for(Member temp : Day08_05.member) {// 해당사항 찾는 반복문
+			if(temp != null && temp.name.equals(name) && temp.phone.equals(phone)) {// 이름 전화번호일치하면
+				System.out.println("당신의 아이디: " + temp.id);
+				return;
+			}
+		}
+		System.out.println("회원이 아닙니다");
 	}
 	
 	//4.비밀번호찾기
-	public String pwfind () {
-		return"아이디";
+	public void pwfind () {
+		System.out.println("-----------------------------아이디 찾기--------------------------------");
+		System.out.println("아이디: "); 		String id = Day08_05.scanner.next();
+		System.out.println("전화번호: ");		String phone = Day08_05.scanner.next();
+		
+		for(Member temp : Day08_05.member) {// 해당사항 찾는 반복문
+			if(temp != null && temp.id.equals(id) && temp.phone.equals(phone)) {// 이름 전화번호일치하면
+				System.out.println("당신의 비밀번호: " + temp.pw);
+				return;
+			}
+		}
+		System.out.println("회원이 아닙니다");
 	}
 	
 }
