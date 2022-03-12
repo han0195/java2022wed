@@ -84,7 +84,7 @@ public class Day08_05 {
 			}else {// 그외
 				System.out.println("알수없는행동");
 			}
-		}// while end
+		}// while endㅠ
 	}// 로그인 메뉴 end
 	// 5.대출: 1.대출가입 2. 대출상환 3.남은대출금 4.뒤로가기
 	void login_menus(String[] result) {
