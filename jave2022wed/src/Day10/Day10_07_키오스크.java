@@ -24,7 +24,7 @@ public class Day10_07_키오스크 {
 			// 2. 파일 읽어오기 [ 파일 ---> 스트림(바이트) ---> 자바 ]
 			// 1. 바이트배열 선언
 			byte[] bytes = new byte[1024];// bit -> byte -> kb
-			// 2. 읽어와서 배열 저장
+			// 2. 읽어와서 바이트 배열 저장
 			inputStream.read(bytes);
 			// 3. [, : 필드 구분 \n : 객체(상품 구분)]
 			String 파일내용 = new String( bytes ); // 바이트열 -> 문자열
