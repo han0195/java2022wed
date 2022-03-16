@@ -8,6 +8,7 @@ public class student {
 	private int 수학;
 	private int 총점;
 	private double 평균;
+	private int 석차;
 	
 	
 	//2.생성자
@@ -136,6 +137,25 @@ public class student {
 	public void set평균(double 평균) {
 		this.평균 = 평균;
 	}
+
+
+
+
+
+
+	public int get석차() {
+		return 석차;
+	}
+
+
+
+
+
+
+	public void set석차(int 석차) {
+		this.석차 = 석차;
+	}
+	
 	
 	
 }
