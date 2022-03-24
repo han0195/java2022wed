@@ -60,19 +60,23 @@ public class Contorller {
 		//회원번호 받아와서
 		Random random = new Random();	//난수객체선언
 		//계좌번호생성후 중복검사 실행 중복이 아니면 저장
-		while(true) {
 			int 번호 = random.nextInt(10000)+1;			
 			String 번호str = String.format("%04d", 번호);	// %04d == 4자리수가안되면 0으로 채움[String.format]
-			bank.add(new 은행(bno, 번호str, 0, pw)); // 객체화동시에 리스트의 저장
-			return true;	// 트루 반환
-			/////////////////////////////////////////////////////////
-			//for(은행 temp : bank) {??????????????? for문실행안됨
-			//	if(temp.get계좌번호().equals(번호str) == false) {					
-			//		return true;
-			//	}
-			//}
-			/////////////////////////////////////////////////////////
-		}	
+				// 트루 반환
+			if(bank.size() == 0) { // 사이즈가 0이라면
+				bank.add(new 은행(bno, 번호str, 0, pw)); // 객체화동시에 리스트의 저장
+				return true;
+			}else {// 사이즈가 0 이상이라면
+				for(은행 temp : bank) {
+					if(temp.get계좌번호().equals(번호str) == false) {
+						번호 = random.nextInt(10000)+1;
+						번호str = String.format("%04d", 번호);	
+						bank.add(new 은행(bno, 번호str, 0, pw));
+						return true;
+					}
+				}
+			}
+			return false;
 	}
 	public static boolean 입금(String 계좌번호, int mon) {
 		//입금할계좌를 받아와서
