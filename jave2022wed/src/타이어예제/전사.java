@@ -10,10 +10,10 @@ public class 전사 extends 캐릭터{
 	public boolean 사냥() {
 		HP--;
 		if(HP == 0) {
-			System.out.println("전사님 게임오버");
+			System.out.println("전사 사망");
 			return false;
 		}else {
-			System.out.println("남은 HP :" + HP + " 전사");
+			System.out.println("남은 HP :" + HP + " 전사 lv" + lv);
 			return true;
 		}
 	}

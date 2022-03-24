@@ -9,10 +9,10 @@ public class ±Ã¼ö extends Ä³¸¯ÅÍ{
 	public boolean »ç³É() {
 		HP--;
 		if(HP == 0) {
-			System.out.println("±Ã¼ö´Ô °ÔÀÓ¿À¹ö");
+			System.out.println("±Ã¼ö »ç¸Á");
 			return false;
 		}else {
-			System.out.println("³²Àº HP :" + HP + " ±Ã¼ö");
+			System.out.println("³²Àº HP :" + HP + " ±Ã¼ö lv" + lv);
 			return true;
 		}
 	}
