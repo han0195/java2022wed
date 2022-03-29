@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Day10_5_도서관리 {
-
+	
 	public static void main(String[] args) {
 		
 		//1. 리스트[객체] 생성
 		ArrayList<Book> booklise = new ArrayList<Book>();
-	//리스트클래스 < 리스트안에 저장할 클래스 >
+		//리스트클래스 < 리스트안에 저장할 클래스 >
 		// <클래스> : 해당 클래스의 여러 객체를 리스트에 저장 // 길이는 가변 [기본 : 10]
 		
 		Scanner scan = new Scanner(System.in);	 // 입력객체
