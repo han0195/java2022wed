@@ -35,8 +35,8 @@ public class 캐릭터 {
 	}
 	public static 캐릭터 매칭() {
 		Random random = new Random();
-		int 공격력 = random.nextInt(50) + 1;
-		int 방어력 = random.nextInt(50) + 1;
+		int 공격력 = random.nextInt(40) + 1;
+		int 방어력 = random.nextInt(150) + 1;
 		캐릭터 com = new 캐릭터("com", 공격력, 방어력);
 		return com;	
 	}
