@@ -23,7 +23,18 @@ public class 점포 implements 키오스크인터{
 		//제품명 점포 받아와서
 		for(상품 temp : 상품리스트) {
 			if(temp.get점포().equals(점포) && temp.getName().equals(제품명) && temp.get재고() != 0) {
-				장바구니.add(new 장바구니(제품명, 1));
+				if(장바구니.size() !=0){//장바구니 사이즈가 0이아니라면
+					for(장바구니 temp2 : 장바구니) {
+						if(temp2.get제품명().equals(제품명)) {
+							temp2.set수량(temp2.get수량() + 1);
+						}else {				
+							장바구니.add(new 장바구니(제품명, 1));
+						}
+					}
+				}else { // 0이라면
+					장바구니.add(new 장바구니(제품명, 1));
+				}
+				
 				return true;
 			}
 		}
@@ -31,8 +42,11 @@ public class 점포 implements 키오스크인터{
 		return false;
 	}
 	@Override
-	public void 결제() {
-		
+	public void 결제() {// 미구현 장바구니 확인용도
+		System.out.println("제품명\t수량");
+		for(장바구니 temp : 장바구니) {	
+			System.out.println(temp.get제품명() +"\t"+ temp.get수량());
+		}
 		
 	}
 	
@@ -43,12 +57,12 @@ public class 점포 implements 키오스크인터{
 		return true;
 	}
 	void 파일저장(String name, String 점포종류, int price, int 재고) throws IOException {
-		FileOutputStream fileOutputStream = new FileOutputStream("C:/Users/504/Desktop/햄버거상품파일/햄버거.txt");
+		FileOutputStream fileOutputStream = new FileOutputStream("C:/Users/gks01/Desktop/txtx/햄버거.txt");
 		String str = name+","+점포종류+","+price+","+재고+"\n";// 저장 , 구분 | \n 한객체 별 구분
 		fileOutputStream.write(str.getBytes());// 파일의 쓰기
 	}
 	void 파일불러오기() throws IOException {
-		FileInputStream fileInputStream = new FileInputStream("C:/Users/504/Desktop/햄버거상품파일/햄버거.txt");
+		FileInputStream fileInputStream = new FileInputStream("C:/Users/gks01/Desktop/txtx/햄버거.txt");
 		byte[] bytes = new byte[10000]; // 바이트배열선언
 		fileInputStream.read(bytes);	// 파일 읽기
 		String string = new String(bytes); // 바이트 -> 문자열

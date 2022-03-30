@@ -9,17 +9,16 @@ public class 키오스크 {
 		// 인터페이스 : 키오스크
 		// 파일처리 : 제품재고 관리
 		// 1.제품목록 2.상품추가 3.결제 [파일처리]
-	public static void main(String[] args){
+	public static void main(String[] args) throws IOException{
 		
 		Scanner s = new Scanner(System.in);
 		String[] 점포종류 = {"버거킹", "롯데리아"};
-		점포 버거킹 = new 버거킹();
-		
+		점포 버거킹 = new 버거킹(); // 버거킹객체보단 딴게 좋을거같음
+		버거킹.파일불러오기();
 		//롯데리아 자리
 		while(true) {	
 			s = new Scanner(System.in);
-			try {		
-				버거킹.파일불러오기();
+			try {				
 				System.out.println("----- 종합 버거집 주문 프로그램 -------");
 				System.out.println("1.버거킹 2.롯데리아"); int 점포선택 = s.nextInt();
 				
@@ -41,7 +40,7 @@ public class 키오스크 {
 							System.out.println("담기실패");
 						}
 					}else if(ch == 3) {// 결제
-						
+						버거킹.결제();
 					}else if(ch == 4) {// 상품추가
 						System.out.println("**** " + 점포종류[점포선택 - 1] + " 상품추가 ****");
 						System.out.println("상품명: "); String name = s.next();
