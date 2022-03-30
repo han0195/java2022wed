@@ -5,10 +5,12 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Day10_07_키오스크 {
-			//상속 : 점포
-			//클래스 : 롯데리아, 버거킹
-			//인터페이스 : 키오스크
-			//파일처리 : 제품재고 관리
+			// 상속 : 점포
+			// 클래스 : 롯데리아, 버거킹
+			// 인터페이스 : 키오스크
+			// 파일처리 : 제품재고 관리
+			// controller : 1.제품목록 2.상품추가 [파일처리]
+	
 	public static void main(String[] args) {
 		
 	
