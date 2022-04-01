@@ -1,5 +1,6 @@
 package 개인과제;
 
+import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
@@ -30,12 +31,17 @@ public class BoardApp {
 	 * 				// 입출력 [ 입력받아 컨트롤러에게 입력받은 값 전달 ] 
 	 */
 	public static void main(String[] args) {
+		
 		Scanner s = new Scanner(System.in);
 		
+		try {
+			Controller.respone();
+		} catch (Exception e) {
+			System.out.println("에러] " + e);
+		}
 		
 		while(true) {
 			try {
-				Controller.respone();
 				System.out.println("*** 비회원 게시판 프로그램 ***");
 				System.out.println("번호\t제목\t내용\t\t날짜\t\t조회수");
 				// 게시물 출력

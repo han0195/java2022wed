@@ -108,12 +108,10 @@ public class controller implements 인터페이스{
 			메모s.add(new 메모장(str[0], Boolean.parseBoolean(str[1]) , str[2], str[3], str[4]));
 		}	
 	}
-
 	public void 메모장파일저장(메모장 save) throws IOException {
 		FileOutputStream fileOutputStream = new FileOutputStream("C:/Users/gks01/Desktop/txtx/메모장.txt", true);
 		String str = save.getContent()+","+save.is완료여부()+","+save.id+","+save.pw+","+save.name+"\n";
 		fileOutputStream.write(str.getBytes());
-		
 	}
 	public void 회원파일저장(회원 save) throws IOException {
 		FileOutputStream fileOutputStream = new FileOutputStream("C:/Users/gks01/Desktop/txtx/회원.txt", true);
