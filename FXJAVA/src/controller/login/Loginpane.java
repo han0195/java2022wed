@@ -3,6 +3,7 @@ package controller.login;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import dao.MemberDao;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -67,14 +68,27 @@ public class Loginpane implements Initializable {
     	String id = txtid.getText();
     	String pw = txtpassword.getText();
     	
-    	if(id.equals("admin") && pw.equals("1234")) {
-    		lblconfirm.setText("관리자 이군요!!!");
-    	}else {
-    		lblconfirm.setText("일반회원 이신군요!!");
-    	}
+    	login(id, pw);
     	
     	System.out.println(" 로그인처리");
     }
+    
+    public boolean login(String id, String password) {
+		// 1. 컨트롤에 입력된 값 가져오기
+    	String txid = txtid.getText();
+		// 2. db객체내 메소드 호출
+		String txpw = txtpassword.getText();
+		// 3. 결과 확인
+		boolean result2 = MemberDao.memberDao.login(txid, password);
+		if(result2) {
+			//페이지 전환 [다음시간]
+			// * 테스트
+			lblconfirm.setText("로그인성공");
+		}else {
+			lblconfirm.setText("실패] 일치하는 회원정보가 없습니다");
+		}
+		return false;
+	}
 	
 	
 }
