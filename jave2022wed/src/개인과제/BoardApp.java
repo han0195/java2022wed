@@ -57,7 +57,7 @@ public class BoardApp {
 				}else if(ch == 2){// 2. 보기
 					System.out.println("보기 인덱스: "); int index = s.nextInt();
 					boolean view = Controller.view(index);
-						if(view) {// 성공ㅈ
+						if(view) {// 성공
 							while(true) {
 								System.out.println("제목\t내용\t\t날짜\t\t조회수");
 								System.out.println(Controller.Boardlist.get(index).getTitle()+"\t"+Controller.Boardlist.get(index).getContent()+"\t\t"+Controller.Boardlist.get(index).getDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd "))+"\t\t"+Controller.Boardlist.get(index).getViews());

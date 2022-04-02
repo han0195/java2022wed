@@ -27,7 +27,6 @@ public class Controller {
 			save();
 			return true;
 		}
-		
 		return false;
 	}
 	public static boolean write(String tit, String con, String pw) throws IOException {
@@ -81,7 +80,6 @@ public class Controller {
 			LocalDate date =  LocalDate.parse(str[3], formatter);
 			Boardlist.add(new Board(str[0],str[1],str[2],date,Integer.parseInt(str[4])));
 		}
-		
 	}
 	public static void commentSave() {// ¥Ò±€¿˙¿Â
 		
