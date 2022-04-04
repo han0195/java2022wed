@@ -1,29 +1,72 @@
 package dto;
 
-public class Member {
+import java.util.Properties;
+
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+
+public class Member { // 데이터 모델
 	
-	private int mnum; // 회원번호
-	private String id; // 회원아이디
-	private String password; // 회원비밀번호
+	// 필드 
+	private int mnum; //회원번호
+	private String mid; // 아이디
+	private String mpassword; //회원비밀번호
 	private String memail; // 이메일
-	private String maddress; // 주소
-	private int mpoint; // 포인트
+	private String maddress; // 주소 
+	private int mpoint;	// 포인트
 	private String mcince; // 가입일
 	
-	public Member() {
-		// TODO Auto-generated constructor stub
-	}
-	public Member(int mnum, String id, String password, String memail, String maddress, int mpoint, String mcince) {
+	// 생성자 
+	public Member() {}
+	public Member(int mnum, String mid, String mpassword, String memail, String maddress, int mpoint, String msince) {
 		super();
 		this.mnum = mnum;
-		this.id = id;
-		this.password = password;
+		this.mid = mid;
+		this.mpassword = mpassword;
 		this.memail = memail;
 		this.maddress = maddress;
 		this.mpoint = mpoint;
-		this.mcince = mcince;
+		this.mcince = msince;
 	}
-
+	
+	// 메소드 
+	public static void sendmail( String 받는사람이메일 , String 내용 ) {
+		//1. 보내는 사람 정보
+		String 보내는사람이메일 = "아이디@naver.com"; 
+		String 보내는사람이메일비밀번호 = "비밀번호"; 
+		//2. 호스트 설정 [ 네이버기준 = 고정 ]
+		Properties properties = new Properties(); // 컬렉션프레임워크 [ map컬렉션 ]
+		properties.put("mail.smtp.host","smtp.naver.com"); // 호스트 주소 
+		properties.put("mail.smtp.port", 587);	// 호스트 포트번호
+		properties.put("mail.smtp.auth", "true"); // 보내는사람이메일 인증
+		properties.put("mail.smtp.ssl.protocols", "TLSv1.2"); // *보안 연결 버전 설정
+		
+		// 3. 인증처리 [ Session : javax.mail 패키지 ] 
+			// Session.getDefaultInstance( 설정객체 , 인증객체 ) 
+		Session session = Session.getDefaultInstance( properties , new Authenticator() {
+			@Override // 오버라이딩 // 보내는사람의 이메일주소,비밀번호 인증 해주는 메소드 구현
+			protected PasswordAuthentication getPasswordAuthentication() { 
+				return new PasswordAuthentication(보내는사람이메일, 보내는사람이메일비밀번호);
+			}
+		});
+		// 4. 메일 보내기 
+		try {
+			MimeMessage message = new MimeMessage(session);		// Mime 프로토콜 : 전자우편 표준 포멧[형식]
+			message.setFrom( new InternetAddress(보내는사람이메일) ); // 보내는사람 
+			message.addRecipient( Message.RecipientType.TO , new InternetAddress(받는사람이메일) ); // 받는사람이메일
+			// 내용 
+			message.setSubject("안산지역 중고거래 회원님의 패스워드 찾기"); // 메일 전송 
+			message.setText("회원님의 비밀번호 : " + 내용 );
+			// 전송
+			Transport.send(message);
+		}catch (Exception e) { System.out.println("메일전송실패 "  +e);}
+	}
+	
 	public int getMnum() {
 		return mnum;
 	}
@@ -32,20 +75,20 @@ public class Member {
 		this.mnum = mnum;
 	}
 
-	public String getId() {
-		return id;
+	public String getMid() {
+		return mid;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setMid(String mid) {
+		this.mid = mid;
 	}
 
-	public String getPassword() {
-		return password;
+	public String getMpassword() {
+		return mpassword;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setMpassword(String mpassword) {
+		this.mpassword = mpassword;
 	}
 
 	public String getMemail() {
@@ -72,13 +115,12 @@ public class Member {
 		this.mpoint = mpoint;
 	}
 
-	public String getMcince() {
+	public String getMsince() {
 		return mcince;
 	}
 
-	public void setMcince(String mcince) {
-		this.mcince = mcince;
+	public void setMcince(String msince) {
+		this.mcince = msince;
 	}
-	
 	
 }

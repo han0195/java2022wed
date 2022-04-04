@@ -11,8 +11,8 @@ public class Start extends Application {
 
 	@Override
 	public void start(Stage stage ) throws Exception {
-		// 5. 컨테이너 불러오기
-		// Parent : 모든 레이아웃의 부모
+		
+		// 5. FXML 파일[ 컨테이너 ] 불러오기
 		Parent parent = 
 				FXMLLoader.load( getClass().getResource("/view/main.fxml"));
 																//  /패키지명(폴더)/파일명.확장자
@@ -21,7 +21,7 @@ public class Start extends Application {
 		// 7. 씬 -> 스테이지 
 		stage.setScene(scene);
 		// 3. 스테이지로고 설정 
-			Image image = new Image("/img/stagelogo.jpeg"); // 1. 이미지 불러오기 [ 이미지 객체화 ]  
+			Image image = new Image("/img/loginlogo.png"); // 1. 이미지 불러오기 [ 이미지 객체화 ]  
 			// Image image2 = new Image("C:/Users/505-t/git/ezen_web_2022_A/java2/src/img/stagelogo.jpeg"); // 1. 이미지 불러오기 [ 이미지 객체화 ]  
 				// 절대경로  vs 상대경로 
 				// 절대경로 : 모든 경로
