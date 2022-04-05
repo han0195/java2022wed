@@ -35,7 +35,12 @@ public class Home implements Initializable {
 	private Label lblinfochange;
 	@FXML
 	private BorderPane borderpane;
+	@FXML
+	private Label lablboard;
 	
+	public static Home home;
+	
+	public Home() { home = this; }
 	
 	@FXML//회워정보 수정 눌렀을때
 	public void infochange( MouseEvent e) {
@@ -87,6 +92,11 @@ public class Home implements Initializable {
 			}
 		}
 		// 아니면 
+	}
+	
+	@FXML
+	public void board( MouseEvent e ) {
+		loadpage("/view/home/infolist.fxml");
 	}
 
 	
