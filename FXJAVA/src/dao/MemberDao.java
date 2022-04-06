@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 
 import controller.login.Login;
 import dto.Member;
+import dto.reply;
 
 public class MemberDao { // DB 접근객체
 	
@@ -201,6 +202,21 @@ public class MemberDao { // DB 접근객체
 		} catch (Exception e) {
 			System.out.println("[SQL 에러]" + e);
 		}
+	}
+	
+	public String getmid(int mnum) {
+		try {
+			String sql = "select mid from member where mnum = ?";
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, mnum);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				return rs.getString(1);
+			}
+		} catch (Exception e) {
+			System.out.println("[SQL 에러]" + e);
+		}
+		return null;
 	}
 }
 

@@ -38,6 +38,8 @@ public class Home implements Initializable {
 	@FXML
 	private Label lablboard;
 	
+	private Label lblproduct;
+	
 	public static Home home;
 	
 	public Home() { home = this; }
@@ -97,6 +99,10 @@ public class Home implements Initializable {
 	@FXML
 	public void board( MouseEvent e ) {
 		loadpage("/view/home/infolist.fxml");
+	}
+	
+	public void product( MouseEvent e) {
+		loadpage("/view/product/product.fxml");
 	}
 
 	
