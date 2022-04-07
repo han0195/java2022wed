@@ -31,12 +31,12 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <Label fx:id="lablid" layoutX="207.0" layoutY="372.0" prefHeight="18.0" prefWidth="122.0" text="제품등록회원">
+      <Label fx:id="lablid" layoutX="207.0" layoutY="381.0" prefHeight="18.0" prefWidth="122.0" text="제품등록회원">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label fx:id="txtprice" layoutX="51.0" layoutY="381.0" prefHeight="32.0" prefWidth="139.0" text="희망가격" textFill="#f80000">
+      <Label fx:id="txtprice" layoutX="45.0" layoutY="374.0" prefHeight="32.0" prefWidth="139.0" text="희망가격" textFill="#f80000">
          <font>
             <Font size="17.0" />
          </font>
@@ -47,15 +47,16 @@
           <TableColumn prefWidth="75.0" text="C2" />
         </columns>
       </TableView>
-      <Label fx:id="lablmin" layoutX="43.0" layoutY="108.0" prefHeight="18.0" prefWidth="122.0" text="제품상태">
+      <Label fx:id="labltrans" layoutX="802.0" layoutY="108.0" prefHeight="18.0" prefWidth="122.0" text="거래여부: 판매중">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label fx:id="labldate" layoutX="371.0" layoutY="108.0" prefHeight="18.0" prefWidth="226.0" text="제품상태">
+      <Label fx:id="labldate" layoutX="371.0" layoutY="108.0" prefHeight="18.0" prefWidth="226.0" text="제품등록일">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
+      <Button fx:id="btntrans" layoutX="802.0" layoutY="67.0" mnemonicParsing="false" onAction="#trans" prefHeight="39.0" prefWidth="104.0" text="판매완료" />
    </children>
 </AnchorPane>

@@ -37,16 +37,40 @@ public class Home implements Initializable {
 	private BorderPane borderpane;
 	@FXML
 	private Label lablboard;
-	
+	@FXML
 	private Label lblproduct;
+	@FXML
+	private Label lblproduct2;
+	@FXML
+	private Label lblproduct3;
+	@FXML
+	private Label lblproduct4;
 	
 	public static Home home;
 	
 	public Home() { home = this; }
 	
+	public static String category;
+	@FXML // 남성의류 레이블을 클릭했을때 이벤트
+	public void product( MouseEvent e) {
+		loadpage("/view/product/product.fxml"); category = "남성의류";
+	}
+	@FXML
+	public void product2( MouseEvent e) {
+		loadpage("/view/product/product.fxml"); category = "여성의류";
+	}
+	@FXML
+	public void product3( MouseEvent e) {
+		loadpage("/view/product/product.fxml"); category = "게임기기";
+	}
+	@FXML
+	public void product4( MouseEvent e) {
+		loadpage("/view/product/product.fxml"); category = "생활용품";
+	}
+		
 	@FXML//회워정보 수정 눌렀을때
 	public void infochange( MouseEvent e) {
-		loadpage("/view/home/infochange.fxml");
+		loadpage("/view/home/infochange.fxml"); 
 	}
 	
 	@FXML// 회원정보 레이블을 클릭했을때 이벤트
@@ -61,6 +85,7 @@ public class Home implements Initializable {
 	
 	@Override // 실행 초기 메소드 
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		loadpage("/view/chatting.fxml");
 		lblloginid.setText( Login.member.getMid()+" 님" );
 		lblpoint.setText("포인트 : "+ Login.member.getMpoint()+" 점");
 	}
@@ -96,14 +121,13 @@ public class Home implements Initializable {
 		// 아니면 
 	}
 	
-	@FXML
+	
+	@FXML 
 	public void board( MouseEvent e ) {
 		loadpage("/view/home/infolist.fxml");
 	}
+
 	
-	public void product( MouseEvent e) {
-		loadpage("/view/product/product.fxml");
-	}
 
 	
 }

@@ -13,6 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
@@ -29,8 +30,19 @@ public class productC implements Initializable{
 
 	  @FXML
 	  private VBox vbox;
+	  @FXML
+	  private TextField txtsearch;
+
+	  @FXML
+	  private Button btnsearch;
+
 	
 	  public static product selet;
+	  @FXML
+	   void search(ActionEvent event) { // 검색 버튼을 눌렀을때
+		  String search = txtsearch.getText();
+		  listview(search);// 검색String 넘김
+	   }
     @FXML
     void add(ActionEvent event) {
     	Home.home.loadpage("/view/product/productadd.fxml");
@@ -38,7 +50,14 @@ public class productC implements Initializable{
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		ArrayList<product> productlist = productdao.productdao.list();
+		listview(null); // 초기값 null
+	}
+	void listview(String search) {
+		//if (vbox.getChildren().isEmpty() == false) {
+			vbox.getChildren().clear();
+		//}
+		
+		ArrayList<product> productlist = productdao.productdao.list( Home.category, search);
 		//2. 그리드 클래스
 		GridPane gridPane = new GridPane();
 			// * 그리드간 여백
@@ -61,7 +80,7 @@ public class productC implements Initializable{
 				//버튼의 아이디값넣기
 				button.setId(i + "");
 				// * 버튼 클릭이벤트
-				button.setOnAction( e -> { System.out.println("버튼클릭" + e); 
+				button.setOnAction( e -> { 
 					// 1. 클릭한 버튼의 id 가져오기
 					int id = Integer.parseInt(e.toString().split(",")[0].split("=")[2]);
 					// 2. 크릭한 제품 번호 저장
@@ -89,7 +108,7 @@ public class productC implements Initializable{
 				//버튼의 아이디값넣기
 				button.setId(i + "");
 				// * 버튼 클릭이벤트
-				button.setOnAction( e -> { System.out.println("버튼클릭" + e); 
+				button.setOnAction( e -> {
 					// 1. 클릭한 버튼의 id 가져오기
 					int id = Integer.parseInt(e.toString().split(",")[0].split("=")[2]);
 					// 2. 크릭한 제품 번호 저장

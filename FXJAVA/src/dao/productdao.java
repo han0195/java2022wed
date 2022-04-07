@@ -45,11 +45,21 @@ public class productdao {
 		return false;
 	}
 	// 2. 모든 제품 출력 [ tableview 사용x -> arraylist 사용]
-	public ArrayList<product> list(){
+	public ArrayList<product> list(String category, String search){
 		ArrayList<product> productlist = new ArrayList<product>();
 		try {
-			String sql = "select * from product";
-			ps = con.prepareStatement(sql);
+			String sql = null;
+			if(search == null) {
+				sql = "select * from product where pcategory = ?";
+				ps = con.prepareStatement(sql);
+				ps.setString(1, category);
+			}else {
+				sql = "select * from product where pcategory = ? and pname like '%"+search+"%'";
+				ps = con.prepareStatement(sql);
+				ps.setString(1, category);
+			}
+			
+			
 			rs = ps.executeQuery();
 			
 			while(rs.next()) {
@@ -102,5 +112,33 @@ public class productdao {
 			return true;
 		}catch(Exception e ) { System.out.println( "[SQL 오류]"+e  ); }
 		return false;
+	}
+	public boolean activation(int pnum) {
+		try {
+			String sql = "select pactivation from product where pnum=?";
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, pnum);
+			rs = ps.executeQuery();
+			if(rs.next()) { // 검새결과가 존재하면 다음레코드 가져오기
+					String upsql = null;
+				if(rs.getInt(1) == 1) {
+					upsql = "update product set pactivation = 2 where pnum=?";
+				}else if(rs.getInt(1) == 2) {
+					upsql = "update product set pactivation = 3 where pnum=?";
+				}else if (rs.getInt(1) == 3) {
+					upsql = "update product set pactivation = 1 where pnum=?";
+				}
+				
+				ps = con.prepareStatement(upsql);
+				ps.setInt(1, pnum);
+				ps.executeLargeUpdate();
+				return true;
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return false;
+		
+		
 	}
 }

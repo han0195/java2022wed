@@ -48,13 +48,15 @@ public class productview implements Initializable{
 
 	    @FXML
 	    private Label txtprice;
-
 	    @FXML
-	    private Label lablmin;
+	    private Label labltrans;
 	    @FXML
 	    private ImageView img;
 	    @FXML
 	    private Label labldate;
+
+	    @FXML
+	    private Button btntrans;
 	    @FXML
 	    void back(ActionEvent event) {
 	    	Home.home.loadpage("/view/product/product.fxml");
@@ -90,21 +92,39 @@ public class productview implements Initializable{
 			// * 천단위 쉼표
 		DecimalFormat decimalFormat = new DecimalFormat("가격: #,##0원");
 		txtprice.setText( decimalFormat.format(product.getPprice() )  );
-		if(product.getPactivation() == 1) {lablpass.setText("상태: 판매중");}
-		if(product.getPactivation() == 2) {lablpass.setText("상태: 거래중");}
-		if(product.getPactivation() == 3) {lablpass.setText("상태: 판매완료");}
+		if(product.getPactivation() == 1) {lablpass.setText("상태: 판매중");btntrans.setText("거래중");} 
+		if(product.getPactivation() == 2) {lablpass.setText("상태: 거래중");btntrans.setText("판매완료");}	
+		if(product.getPactivation() == 3) {lablpass.setText("상태: 판매완료"); btntrans.setText("판매중");}
 		labldate.setText("제품 등록일 : " + product.getPdate());
 		//* 회원번호로 이용한 회원dkdlel 찾기
 		lablid.setText("제품등록회원: " + MemberDao.memberDao.getmid(product.getMnum()));
 		// 제품등록 회원번호랑 로그인회원 번호가 동일하지않으면
 		txtname.setEditable(false);
 		 txttcontent.setEditable(false);
-		if(Login.member.getMnum() != product.getMnum()) {
-			txtname.setEditable(false);
-			txttcontent.setEditable(false);
-		}
-		
-			
 		
 	}
+	  @FXML
+	  void trans(ActionEvent event) {
+		  if(btntrans.getText().equals("거래중")) {
+			  labltrans.setText("상태: 거래중");
+			  btntrans.setText("판매완료");
+			  productdao.productdao.activation( productC.selet.getPnum());
+			  productC.selet.setPactivation(2);
+			  return;
+		  }
+		  if(btntrans.getText().equals("판매완료")) {
+			  labltrans.setText("상태: 판매완료");
+			  btntrans.setText("판매중");
+			  productdao.productdao.activation( productC.selet.getPnum());
+			  productC.selet.setPactivation(3);
+			  return;
+		  }
+		  if(btntrans.getText().equals("판매중")) {
+			  labltrans.setText("상태: 판매중");
+			  btntrans.setText("거래중");
+			  productdao.productdao.activation( productC.selet.getPnum());
+			  productC.selet.setPactivation(1);
+			  return;
+		  }
+	  }
 }
