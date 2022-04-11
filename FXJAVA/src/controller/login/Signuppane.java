@@ -7,7 +7,6 @@ import java.util.Date;
 import java.util.ResourceBundle;
 
 import dao.MemberDao;
-import dao.logdao;
 import dto.Member;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -101,7 +100,7 @@ public class Signuppane implements Initializable {
     		}
     		// * 모든 유효성검사 통과시 DB에 저장 
     		// 1. 객체화	[ 회원번호없음=0 , id , password, email, address, 포인트없음=0 , since ]
-    		Member member = new Member(0, id, password, email, address, 50, since);
+    		Member member = new Member(0, id, password, email, address, 0, since);
     		// 2. DB 객체내 메소드 호출 
     		boolean result = MemberDao.memberDao.signup(member);
     		// 3. 확인 
@@ -112,7 +111,6 @@ public class Signuppane implements Initializable {
 	    			alert.setHeaderText("안산시 중고거래에 가입을 축하합니다.");
 	    			alert.setContentText("회원가입 성공");
 	    			alert.showAndWait(); // 메시지 실행;
-	    			logdao.logdao.singuplogsave(member);
     			// 2. 화면 전환 [ 로그인페이지 전환 ]
 	    			Login.instance.loadpage("/view/login/loginpane.fxml");
     		}else {

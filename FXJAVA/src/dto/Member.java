@@ -19,7 +19,7 @@ public class Member { // 데이터 모델
 	private String memail; // 이메일
 	private String maddress; // 주소 
 	private int mpoint;	// 포인트
-	private String mcince; // 가입일
+	private String msince; // 가입일
 	
 	// 생성자 
 	public Member() {}
@@ -31,7 +31,7 @@ public class Member { // 데이터 모델
 		this.memail = memail;
 		this.maddress = maddress;
 		this.mpoint = mpoint;
-		this.mcince = msince;
+		this.msince = msince;
 	}
 	
 	// 메소드 
@@ -116,11 +116,11 @@ public class Member { // 데이터 모델
 	}
 
 	public String getMsince() {
-		return mcince;
+		return msince;
 	}
 
 	public void setMcince(String msince) {
-		this.mcince = msince;
+		this.msince = msince;
 	}
 	
 }

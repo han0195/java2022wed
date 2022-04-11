@@ -1,13 +1,10 @@
 package controller.login;
 
 import java.net.URL;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.ResourceBundle;
 
 import controller.Main;
 import dao.MemberDao;
-import dao.logdao;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -69,31 +66,15 @@ public class Loginpane implements Initializable {
     	//1. 컨트롤[fxid]에 입력된 값 가져오기
     	String id = txtid.getText();
     	String password = txtpassword.getText();
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-    	String since = format.format( new Date() ); // 현재날짜를 형식 변환
     	//2. db객체내 메소드 호출 
     	boolean result = MemberDao.memberDao.login(id, password);
     	//3. 결과 확인 
     	if( result ) {
     		// 로그인 성공시 성공한 회원정보 저장  [ 로그아웃시 초기화 ] 
     		Login.member = MemberDao.memberDao.getmember(id);
-    		//로그 꺼내오기	
-    		String log = logdao.logdao.logout(Login.member.getMid());
-    		// 로그검사
-    		if(log != null) {
-    			if(!log.equals(since)) {// 서로 같지않으면
-    				//포인트지급
-    				System.out.println("지급");
-    				MemberDao.memberDao.payment(Login.member.getMnum(), 10);
-    			}
-    		}
-    		// 로그최신화
-    		logdao.logdao.logupdate(Login.member.getMid());
-    		
-    		
     		// 페이지 전환
     		Main.instance.loadpage("/view/home/home.fxml");
-    		// * 테스트
+    		// * 테스트 
     		lblconfirm.setText("로그인성공");
     	}else {
     		lblconfirm.setText("동일한 회원정보가 없습니다.");

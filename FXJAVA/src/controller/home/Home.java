@@ -6,7 +6,9 @@ import java.util.ResourceBundle;
 
 import controller.Main;
 import controller.login.Login;
+import dao.BoardDao;
 import dao.MemberDao;
+import dto.Board;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -19,7 +21,13 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 
 public class Home implements Initializable {
-				// fxml 실행시 초기값 설정 인테페이스 
+				// fxml 실행시 초기값 설정 인테페이스
+	
+	public static Home home; // 객체 
+	
+	// * this : 현재 클래스의 메모리 호출
+	public Home() { home = this; }
+	
 	
 	@FXML
 	private Label lblloginid;
@@ -32,49 +40,53 @@ public class Home implements Initializable {
 	@FXML
 	private Label lblinfo; // fxid가져오기
 	@FXML
-	private Label lblinfochange;
+	private Label lblupdate; // fxid가져오기
+	@FXML
+	private Label lblboard; // fxid가져오기
+	@FXML
+	private Label lblproduct1; // fxid가져오기
+	@FXML
+	private Label lblproduct2; // fxid가져오기
+	@FXML
+	private Label lblproduct3; // fxid가져오기
+	@FXML
+	private Label lblproduct4; // fxid가져오기
+	
 	@FXML
 	private BorderPane borderpane;
-	@FXML
-	private Label lablboard;
-	@FXML
-	private Label lblproduct;
-	@FXML
-	private Label lblproduct2;
-	@FXML
-	private Label lblproduct3;
-	@FXML
-	private Label lblproduct4;
-	
-	public static Home home;
-	
-	public Home() { home = this; }
 	
 	public static String category;
-	@FXML // 남성의류 레이블을 클릭했을때 이벤트
-	public void product( MouseEvent e) {
-		loadpage("/view/product/product.fxml"); category = "남성의류";
+	
+	@FXML// 남성의류 레이블을 클릭했을때 이벤트
+	public void accproduct1( MouseEvent e ) { 
+		loadpage("/view/product/product.fxml"); 
+		category="남성의류";
 	}
-	@FXML
-	public void product2( MouseEvent e) {
-		loadpage("/view/product/product.fxml"); category = "여성의류";
+	@FXML// 여성의류 레이블을 클릭했을때 이벤트
+	public void accproduct2( MouseEvent e ) { 
+		loadpage("/view/product/product.fxml"); 
+		category="여성의류";
 	}
-	@FXML
-	public void product3( MouseEvent e) {
-		loadpage("/view/product/product.fxml"); category = "게임기기";
+	@FXML// 게임기기 레이블을 클릭했을때 이벤트
+	public void accproduct3( MouseEvent e ) { 
+		loadpage("/view/product/product.fxml"); 
+		category="게임기기";
 	}
-	@FXML
-	public void product4( MouseEvent e) {
-		loadpage("/view/product/product.fxml"); category = "생활용품";
+	@FXML// 생활용품 레이블을 클릭했을때 이벤트
+	public void accproduct4( MouseEvent e ) { 
+		loadpage("/view/product/product.fxml"); 
+		category="생활용품";
 	}
-		
-	@FXML//회워정보 수정 눌렀을때
-	public void infochange( MouseEvent e) {
-		loadpage("/view/home/infochange.fxml"); 
-	}
+	
+	@FXML// 자유게시 레이블을 클릭했을때 이벤트
+	public void accboard( MouseEvent e ) { loadpage("/view/board/board.fxml"); }
 	
 	@FXML// 회원정보 레이블을 클릭했을때 이벤트
 	public void accinfo( MouseEvent e ) { loadpage("/view/home/info.fxml"); }
+	
+	@FXML// 회원수정 레이블을 클릭했을때 이벤트
+	public void accupdate( MouseEvent e ) { loadpage("/view/home/update.fxml"); }
+	
 	
 	public void loadpage( String page ) {
 		try {
@@ -96,6 +108,7 @@ public class Home implements Initializable {
 		Login.member = null;
 		// 2. 페이지 전환
 		Main.instance.loadpage("/view/login/login.fxml");
+		
 	}
 	@FXML// 회원탈퇴 레이블을 클릭했을때 이벤트
 	public void delete( MouseEvent e ) {
@@ -120,14 +133,6 @@ public class Home implements Initializable {
 		}
 		// 아니면 
 	}
-	
-	
-	@FXML 
-	public void board( MouseEvent e ) {
-		loadpage("/view/home/infolist.fxml");
-	}
-
-	
 
 	
 }

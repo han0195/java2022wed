@@ -5,9 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import controller.login.Login;
 import dto.Member;
-import dto.reply;
 
 public class MemberDao { // DB 접근객체
 	
@@ -58,7 +56,7 @@ public class MemberDao { // DB 접근객체
 			ps.setString( 3 , member.getMemail() ); // 3번 ? 에 이메일 넣어주기
 			ps.setString( 4 , member.getMaddress() ); // 4번 ? 에 주소 넣어주기
 			ps.setInt( 5 , member.getMpoint() ); // 5번 ? 에 포인트 넣어주기
-			ps.setString( 6 , member.getMsince()); // 6번 ? 에 가입일 넣어주기
+			ps.setString( 6 , member.getMsince() ); // 6번 ? 에 가입일 넣어주기
 			// 3. SQL 실행 
 			ps.executeUpdate(); // insert 실행 -> 삽입 결과물 X -> resultset X
 			return true; // * 성공시 
@@ -77,10 +75,9 @@ public class MemberDao { // DB 접근객체
 			ps.setString(1, id);		// 첫번째 ? 에 id 변수 넣기 
 			ps.setString(2, password); // 두번째 ? 에 password 변수 넣기
 			// 3. sql 실행 
-			rs = ps.executeQuery(); // select 실행 -> resultset 
+			rs = ps.executeQuery(); // select 실행 -> resultset  
 			// 4. sql 결과
-			if( rs.next() ) { // select 시 결과물이 있으면
-				// 1일 1회 포인트 지급
+			if( rs.next() ) { // select 시 결과물이 있으면 
 				return true; // 아이디와 비밀번호가 동일 -> 로그인 성공 
 			}
 		}catch(Exception e ) { System.out.println( "[SQL 오류]"+e  ); }
@@ -166,58 +163,32 @@ public class MemberDao { // DB 접근객체
 		return false;
 	}
 	
-	// 7. 회원수정 [ 회원번호(대상), 이메일(내용) , 주소 를 인수로 받아서 회원번호]
-	public boolean updata( int mnum, String email, String address) {
+	// 7. 회원수정 [ 회원번호 , 이메일 , 주소 를 인수로 받아서 회원수정 처리 ]
+	public boolean update( int mnum , String email , String address ) {
 		try {
-			// 1. SQL 작성
-						// 수정 : update 테이블명 set 필드명1 = 수정값1 , 필드명2 = 수정값2 where 조건
-					String sql = "update member set memail = ?, maddress = ? where mnum = ?";
-					// 2. SQL 조작
-					ps = con.prepareStatement(sql);
-					ps.setString(1, email);
-					ps.setString(2, address);
-					ps.setInt(3, mnum);
-					// 3. SQL 실행
-					ps.executeUpdate();
-					// 4. SQL 결과
-					return true;
-		} catch (Exception e) {
-			System.out.println("[SQL 에러]" + e);
-		}
-		return false;	
+			// 1.SQL 작성  // 수정 : update 테이블명 set 필드명1=수정값1 , 필드명2=수정값2 where 조건 
+			String sql = "update member set memail=? , maddress=? where mnum =?";
+			ps = con.prepareStatement(sql); 	// 2.SQL 조작
+			ps.setString( 1 , email ); ps.setString(2, address); ps.setInt( 3 , mnum );
+			ps.executeUpdate(); // 3.SQL 실행
+			return true; // 4.SQL 결과
+		}catch(Exception e ) { System.out.println( "[SQL 오류]"+e  ); }
+		return false;
 	}
-	
-	// 8. 포인트지급 []
-	public void payment(int mnum, int point) {// 회원번호(대상) , 포인트받아서 파일처리 후 변경
+	// 8. 해당 회원번호로 해당 id 찾기
+	public String getmid( int mnum ) {
 		try {
-			// 1. SQL 작성
-			String sql = "update member set mpoint = ? where mnum = ?";
-			// 2. SQL 조작
-			ps = con.prepareStatement(sql);
-			ps.setInt(1, Login.member.getMpoint() +  point);
-			ps.setInt(2, mnum);
-			// 3. SQL 실행
-			ps.executeUpdate();
-			// 4. SQL 결과
-		} catch (Exception e) {
-			System.out.println("[SQL 에러]" + e);
-		}
-	}
-	
-	public String getmid(int mnum) {
-		try {
-			String sql = "select mid from member where mnum = ?";
+			String sql ="select mid from member where mnum = ?";
 			ps = con.prepareStatement(sql);
 			ps.setInt(1, mnum);
 			rs = ps.executeQuery();
-			while(rs.next()) {
-				return rs.getString(1);
+			if( rs.next() ) {
+				return rs.getString(1);// 찾은 id 반환
 			}
-		} catch (Exception e) {
-			System.out.println("[SQL 에러]" + e);
-		}
+		}catch(Exception e ) { System.out.println( "[SQL 오류]"+e  ); }
 		return null;
 	}
+	
 }
 
 

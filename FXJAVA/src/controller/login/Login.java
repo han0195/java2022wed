@@ -4,11 +4,11 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import dto.Member;
-import dto.logdto;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -36,19 +36,24 @@ public class Login implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// 1. 동영상 삽입하기
 			// 1. 동영상파일 객체화
-			Media media = new Media( getClass().getResource("/img/Dancer - 70410.mp4").toString());
+			Media media = new Media( getClass().getResource("/img/login.mp4").toString());
 			// 2. 미디어플레이어 객체에 동영상 넣기 
 			MediaPlayer mediaPlayer = new MediaPlayer(media);
 			// 3. 미디어뷰에 미디어플레이어 넣기 
 			mediaview.setMediaPlayer(mediaPlayer);
 			// 4. 미디어플레이어 시작
 			mediaPlayer.play();
-			mediaPlayer.setOnEndOfMedia( new Runnable() {	
+			
+			// * 동영상 무한재생 // 미디어 끝났을때 
+			mediaPlayer.setOnEndOfMedia( new Runnable() {
 				@Override
-				public void run() {
-					mediaPlayer.seek(Duration.ZERO);		
+				public void run() { // 멀티 스레드 
+					mediaPlayer.seek( Duration.ZERO);
+					// 미디어의 현재 위치를 처음으로 돌리기
 				}
-			});
+			} );
+			
+			
 			loadpage("/view/login/loginpane.fxml");
 			
 	}
