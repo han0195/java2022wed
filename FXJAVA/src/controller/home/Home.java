@@ -6,9 +6,7 @@ import java.util.ResourceBundle;
 
 import controller.Main;
 import controller.login.Login;
-import dao.BoardDao;
 import dao.MemberDao;
-import dto.Board;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -51,6 +49,8 @@ public class Home implements Initializable {
 	private Label lblproduct3; // fxid가져오기
 	@FXML
 	private Label lblproduct4; // fxid가져오기
+	@FXML
+	private Label lablrecode;
 	
 	@FXML
 	private BorderPane borderpane;
@@ -132,6 +132,10 @@ public class Home implements Initializable {
 			}
 		}
 		// 아니면 
+	}
+	
+	public void recode( MouseEvent e ) {
+		loadpage("/view/recode.fxml");
 	}
 
 	

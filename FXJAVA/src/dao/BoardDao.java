@@ -147,6 +147,21 @@ public class BoardDao {
 		}catch(Exception e ) { System.out.println( "[SQL 오류]"+e  ); }
 			return null;
 	}
+	
+	//9. 전체 게시판 반환
+	public int membertotal() {
+		String sql = "select count(*) from board";
+		try {
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				return rs.getInt(1);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return 0;
+	}
 }
 
 

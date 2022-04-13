@@ -46,7 +46,11 @@ public class ProductDao {
 		ArrayList<Product> productlist = new ArrayList<>(); // 리스트 선언 	
 		try {
 			String sql = null;
-			if( search == null ) { // 검색이 없을경우
+			if(category == null && search == null) {
+				sql = "select * from product";
+				ps = con.prepareStatement(sql);
+			}
+			else if( search == null ) { // 검색이 없을경우
 				sql  = "select * from product where pcategory = ? order by pnum desc";	// SQL 작성
 				ps = con.prepareStatement(sql);			// SQL 연결 
 				ps.setString( 1 , category );
@@ -130,6 +134,20 @@ public class ProductDao {
 		}catch(Exception e ) { System.out.println( "[SQL 오류]"+e  ); }
 		return false;
 	}
+	//9. 전체 제품수 반환
+		public int membertotal() {
+			String sql = "select count(*) from product";
+			try {
+				ps = con.prepareStatement(sql);
+				rs = ps.executeQuery();
+				if(rs.next()) {
+					return rs.getInt(1);
+				}
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			return 0;
+		}
 	
 	
 }

@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.HashMap;
+import java.util.Map;
 
 import dto.Member;
 
@@ -187,6 +189,52 @@ public class MemberDao { // DB 접근객체
 			}
 		}catch(Exception e ) { System.out.println( "[SQL 오류]"+e  ); }
 		return null;
+	}
+	
+	//9. 전체 회원수 반환
+	public int membertotal() {
+		String sql = "select count(*) from member";
+		try {
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				return rs.getInt(1);
+			}
+		} catch (Exception e) {
+			System.out.println( "[SQL 오류]"+e  );
+		}
+		return 0;
+	}
+	// 11. 카테고리별 개수
+	public Map<String, Integer> countcategory() {
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		String sql = "select pcategory , count(*) from product group by pcategory";
+		try {
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				map.put(rs.getString(1), rs.getInt(2));
+			}
+			return map;
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return null;
+	}
+
+	// 11. 날짜별로 게시물 등록수 반환
+	public Map<String, Integer > datetotal2(String date,String ce){
+		System.out.println(date+" "+ce);
+		Map<String , Integer > map = new HashMap<String, Integer>();
+		String sql = "select substring_index( "+date+" , ' ' , 1 )  , count(*) from "+ce+" group by substring_index( "+date+" , ' ' , 1 )";
+		try {
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while( rs.next() ) {
+				map.put( rs.getString( 1 ) , rs.getInt( 2 ) );
+			}
+			return map;
+		}catch( Exception e ) {}  return null;
 	}
 	
 }
