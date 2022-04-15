@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	li{ list-style: none;}
+	#join{ width: 600px; margin: 0 auto;
+	border-bottom: 3px solid #eeeeee;
+	border-top: 3px solid #eeeeee;
+	padding-top: 30px;
+	padding-bottom: 20px;
+	}
+	form{
+	width: 600px; margin: 0 auto;
+	}
+	h3{ text-align: center; }
+	.litem{ display: inline-block; 
+	margin-bottom: 10px;}
+	.litem > li { display: inline-block; }
+	.text > input{
+		height: 25px;
+	}
+	.str {
+		width: 100px;
+	}
+	.btn {
+		float: right;
+		margin-left: 10px;
+		margin-top: 10px;
+		height: 40px;
+	}
+	.litem13 > input { margin-left: 10px;}
+	.litem15 > input { margin-left: 10px;}
+	.litem16 { vertical-align: top;}
+</style>
+</head>
+<body>
+<div>
+	<h3>회원 가입 폼</h3>
+	<form>
+		<ul id="join">
+			<li>
+				<ul class="litem">
+					<li class="litem1 str" >아이디</li>
+					<li class="litem2 text" > <input type="text"> </li>
+				</ul>
+			</li>
+			<li>
+				<ul class="litem">
+					<li class="litem3 str">비밀번호</li>
+					<li class="litem4 text"><input type="password"></li>
+				</ul>
+			</li>
+			<li>
+				<ul class="litem">
+					<li class="litem5 str">비밀번호</li>
+					<li class="litem6 text"><input type="password"></li>
+				</ul>
+			</li>
+			<li>
+				<ul class="litem">
+					<li class="litem7 str">이름</li>
+					<li class="litem8 text"> <input type="text"> </li>
+				</ul>
+			</li>
+			<li>
+				<ul class="litem">
+					<li class="litem9 str">이메일</li>
+					<li class="litem10 text"><input type="text"> @</li>
+					<li class="litem11"> <select>
+						<option>직접입력</option>
+						<option>naver.com</option>
+					</select> </li>
+				</ul>
+			</li>
+			<li>
+				<ul class="litem">
+					<li class="litem12 str">이메일 수신</li>
+					<li class="litem13"> <input type="radio" name="no">비수신<input type="radio" name="yes">수신</li>
+				</ul>
+			</li>
+			<li>
+				<ul class="litem">
+					<li class="litem14 str">가입경로</li>
+					<li class="litem15"><input type="checkbox" name="c">친구추천<input type="checkbox" name="c">인터넷검색<input type="checkbox" name="c">기타</li>
+				</ul>
+			</li>
+			<li>
+				<ul class="litem">
+					<li class="litem16 str">인사말</li>
+					<li class="litem17"><textarea rows="10" cols="40"></textarea></li>
+				</ul>
+			</li>
+		</ul>
+		<input type="submit" value="저장하기" class="btn"> <button class="btn">취소하기</button>
+	</form>
+</div>	
+</body>
+</html>
