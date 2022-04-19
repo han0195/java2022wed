@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	#header{
+		background-color: red;
+		height: 80px;
+	}
+	#container {
+		height: 6000px;
+	}
+	#footer {
+		background-color: blue;
+		height: 700px;
+	}
+	#footer > div:nth-child(1){
+		height: 60%;
+	}
+	#footer > div:nth-child(2){
+		height: 30%;
+		background-color: purple;
+	}
+	#footer > div:nth-child(3){
+		height: 10%;
+		background-color: gray;
+	}
+	#container > div:nth-child(1) {
+		height: 5%;
+		background-color: yellow;
+	}
+	#container > div:nth-child(2) {
+		width: 80%;
+		background-color: lime;
+		margin: 0 auto;
+		height: 100%;
+	}
+	#container1-1 > div:nth-child(1) {
+		height: 1%;
+		background: gray;
+	}
+	#container1-1 > div:nth-child(2) {
+		height: 5%
+	}
+	#conta > div{
+		height: 100%;
+		width: 33%;
+		float: left;
+	}
+	#conta > div:nth-child(2){
+		margin-left: 0.5%;
+		margin-right: 0.5%;
+		background-color: purple;
+	}
+	
+	#container1-1 > div:nth-child(3) {
+		height: 23.75%;
+		background: gray;
+	}
+	#container1-1 > div:nth-child(4) {
+		height: 23.75%;
+	}
+	#container1-1 > div:nth-child(5) {
+		height: 23.75%;
+		background: gray;
+	}
+	#container1-1 > div:nth-child(6) {
+		height: 23.75%;
+	}
+</style>
+</head>
+<body>
+	<div id = "header">상단</div>
+	<div id = "container">
+		<div>배너</div>
+		<div id = "container1-1">
+			<div>내용1</div>
+			<div id = "conta">
+				<div>1</div>
+				<div>2</div>
+				<div>3</div>
+			</div>
+			<div>내용3</div>
+			<div>내용4</div>
+			<div>내용5</div>
+			<div>내용6</div>
+		</div>
+	</div>
+	<div id = "footer">
+		<div>하단메뉴</div>
+		<div>하단</div>
+		<div>하단2</div>
+	</div>
+	
+</body>
+</html>

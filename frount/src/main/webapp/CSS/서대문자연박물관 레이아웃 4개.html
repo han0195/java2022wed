@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	body {
+		border: 1px solid black;
+	}
+	#헤더 {
+
+	}
+	#content {
+	 width: 1200px;
+	 height: 900px;
+	 margin: 0 auto;
+	 border-left: 1px solid black;
+	 border-right: 1px solid black;
+	}
+	#footer{
+	 height: 100px;
+	 background: green;
+	}
+	#헤더1{
+		height: 25px;
+		background: red;
+	}
+	#헤더2{
+		height: 80px;
+		background: blue;
+	}
+	#content1{
+		height: 60%;
+		background-color: green;
+	}
+	#content2{
+		height: 40%;
+		background-color: navy;
+		clear: both;
+	}
+	#content1_1 {
+		background-color: orange;
+		width: 75%;
+		height: 100%;
+		float: left;
+	}
+	#content1_2{
+		float: left;
+		width: 25%;
+		height: 100%;
+	}
+	#content1_2 > div:nth-child(2) {
+		margin-top: 0.5%;
+		margin-bottom: 0.5%;
+	}
+	#content1_2 > div {
+		border: 1px solid black;
+		height: 32.8%;
+	}
+	#content2 > div {
+		float: left;
+		height: 100%;
+		width: 25%;
+	}
+	#content2 > div:nth-child(2), #content2 > div:nth-child(4) {
+		background: yellow;
+	}
+</style>
+</head>
+<body>
+		<div id = "헤더">
+			<div id = "헤더1">로그인메뉴</div>
+			<div id = "헤더2">메뉴</div>
+		</div>
+		
+		<div id = "content">
+			<div id = "content1">
+				<div id = "content1_1">이미지</div>
+				<div id = "content1_2">
+					<div>이미지 선택1</div>
+					<div>이미지 선택2</div>
+					<div>이미지 선택3</div>
+				</div>	
+			</div>
+			<div id = "content2">
+				<div>선택 1</div>
+				<div>선택 2</div>
+				<div>선택 3</div>
+				<div>선택 4</div>
+			</div>
+		</div>
+		
+		<div id = "footer">하단</div>
+
+</body>
+</html>
