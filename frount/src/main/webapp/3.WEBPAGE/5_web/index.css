@@ -1,0 +1,50 @@
+*{
+	font-family: "Nanum Gothic";
+}
+a{
+	text-decoration: none;
+	color: black;
+}
+a:hover{
+	color: #eeeeee;
+}
+
+.tophead{  /* ��� �޴� */
+	font-size: 12px; 
+	margin-left: 20px;
+}
+
+.sidemenu{ /*���̵��*/
+	position: fixed; /*����*/
+	left: 10px;
+	margin-top: 80px;
+}
+.content{ /* ����*/
+	margin-top: 80px;
+}
+li {
+	list-style: none;
+	
+}
+
+
+.sidbar{
+	margin-left: 20px;
+}
+.sidbar h3 {
+	margin-bottom: 30px;
+}
+.sidbar li{
+	font-size: 15px;
+	font-weight: bold;
+	margin-bottom: 5px;
+}
+.sidbar ul {
+	padding: 0px
+}
+.sidbar .se {
+	font-size: 12px;
+}
+
+
+
