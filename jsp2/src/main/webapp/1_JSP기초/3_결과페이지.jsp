@@ -22,7 +22,7 @@
 		<body style="background-color:  <%= 색상%>">
 			작성한 이름 : <%= 이름 %>
 			작성한 색상 : <%= 색상 %>
-			// 제어문
+			<br>
 			<!-- 제어문 -->
 			<%
 				if(admin == true){	
