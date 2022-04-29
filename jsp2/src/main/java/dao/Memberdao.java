@@ -4,7 +4,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
+import dto.Board;
 import dto.Member;
 
 public class Memberdao {
@@ -59,6 +61,101 @@ public class Memberdao {
 			if(rs.next()) {
 				return true;
 			}
+		} catch (Exception e) {
+			System.out.println("[SQL 오류]" + e);
+		}
+		return false;
+	}
+	
+	public boolean memberdelete(String id) {
+		try {
+			String sql = "delete from javajsp.member where id = ?";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, id);
+			ps.executeUpdate();
+			return true;
+		} catch (Exception e) {
+			System.out.println("[SQL 오류]" + e);
+		}
+		return false;
+	}
+	
+	public boolean write(Board board) {
+		try {
+			String sql = "insert into board(btitle,bcontent,bwriter,bdate)values(?,?,?,?)";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, board.getTitle());
+			ps.setString(2, board.getContent());
+			ps.setString(3, board.getWriter());
+			ps.setString(4, board.getDate());
+			ps.executeUpdate();
+			return true;
+		} catch (Exception e) {
+			System.out.println("[SQL 오류]" + e);
+		}
+		return false;
+	}
+	
+	public ArrayList<Board> list() {
+		ArrayList<Board> list = new ArrayList<Board>();
+		String sql = "select * from board  order by bno desc";
+		try {
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				Board board = new Board(
+						rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4)	, rs.getString(5)					
+						);
+				list.add(board);
+			}
+			return list;
+		} catch (Exception e) {
+			System.out.println("[SQL 오류]" + e);
+		}
+		return null;
+	}
+	
+	public Board get( int bno) {
+		String sql = "select * from board where bno=?";
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, bno);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				Board board = new Board(
+						rs.getInt(1), rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5)
+						);
+				return board;
+			}
+		} catch (Exception e) {
+			System.out.println("[SQL 오류]" + e);
+		}
+		return null;
+	}
+	
+	public boolean bdelete(int bno) { 
+		String sql = "delete from board where bno=?";
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, bno);
+			ps.executeUpdate();
+			return true;
+		} catch (Exception e) {
+			System.out.println("[SQL 오류]" + e);
+		}
+		return false;
+	}
+	
+	public boolean updata(int bno, String title, String content, String date) {
+		String sql = "update javajsp.board set btitle=?, bcontent =?, bdate = ? where bno=?";
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setString(1, title);
+			ps.setString(2, content);
+			ps.setString(3, date);
+			ps.setInt(4, bno);
+			ps.executeUpdate();
+			return true;
 		} catch (Exception e) {
 			System.out.println("[SQL 오류]" + e);
 		}
