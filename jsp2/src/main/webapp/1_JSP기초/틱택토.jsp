@@ -19,7 +19,7 @@
 	
 	<%
 		// 게임판 초기화
-		if(request.getParameter("re") != null){
+		if(request.getParameter("re") != null){	
 			if(request.getParameter("re").equals("re")){
 				for(int i = 0; i < str.length ; i++){
 					str[i] = "[ ]";
