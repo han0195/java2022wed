@@ -7,7 +7,9 @@
 <body>
 	
 	<%@ include file="../header.jsp" %>
-	로그인페이지
+	<div class="container">
+	로그인
+	</div>
 	<%@ include file="../footer.jsp" %>
 	
 </body>

@@ -6,7 +6,9 @@
 </head>
 <body>
 
+	<div class="container">
 	푸터페이지
-	
+	</div>
+		
 </body>
 </html>
