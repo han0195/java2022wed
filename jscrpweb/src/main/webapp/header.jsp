@@ -11,12 +11,43 @@
 	<link href="/jspweb/css/main.css" rel="stylesheet">
 </head>
 <body>
-	<!--   헤더페이지[ 모든 페이지 사용되기 때문에 = 최상위에서 절대경로 ] -->
-	<div class="container">
-		<a href="/jspweb/main.jsp">home</a>
-		<a href="/jspweb/member/login.jsp">로그인</a>
-		<a href="/jspweb/member/signup.jsp">회원가입</a>
+	<%
+	String mid = (String) session.getAttribute("login");
+	if(mid == null){%>
+		<div class="container">
+		<div class="row">
+			<div class="col-2"></div>
+			<div class="col-8 text-end">
+					
+					<a class="btn btn-primary" href="/jspweb/main.jsp" role="button">home</a>
+					<a class="btn btn-primary" href="/jspweb/member/login.jsp" role="button">로그인</a>
+					<a class="btn btn-primary" href="/jspweb/member/signup.jsp"  role="button">회원가입</a>
+				
+			</div>
+			<div class="col-2 text-end"></div>
+		</div>
 	</div>
+	<% }else{ %>
+			<div class="container">
+		<div class="row">
+			<div class="col-2"></div>
+			<div class="col-8 text-end">
+					
+					<a class="btn btn-primary" href="/jspweb/main.jsp" role="button">home</a>
+					
+					<form action="loginout" method="get" style="display: inline-block;">
+					<input class="btn btn-primary" type="submit" value="로그아웃">
+					</form>				
+					
+					<a class="btn btn-primary" href="/jspweb/member/signup.jsp"  role="button">회원가입</a>
+				
+			</div>
+			<div class="col-2 text-end"></div>
+		</div>
+	</div>	
+	<%} %>
+	<!--   헤더페이지[ 모든 페이지 사용되기 때문에 = 최상위에서 절대경로 ] -->
+	
 	<!-- 부트스트랩 js cdn -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 	<!-- 사용자정의 js -->

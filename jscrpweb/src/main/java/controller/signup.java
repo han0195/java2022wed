@@ -59,9 +59,9 @@ public class signup extends HttpServlet {
 		System.out.println(member.toString());
 		boolean result = MemberDao.getmemberDao().singup(member);
 		if(result) {
-			response.sendRedirect("/jscrweb/member/sigupsuccess.jsp");
+			response.sendRedirect("/jspweb/member/signupsuccess.jsp");
 		}else {
-			response.sendRedirect("/jscrweb/error.jsp");
+			response.sendRedirect("/jspweb/error.jsp");
 		}
 				
 		doGet(request, response);
