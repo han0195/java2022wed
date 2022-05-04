@@ -11,43 +11,43 @@
 	<link href="/jspweb/css/main.css" rel="stylesheet">
 </head>
 <body>
-	<%
-	String mid = (String) session.getAttribute("login");
-	if(mid == null){%>
-		<div class="container">
-		<div class="row">
-			<div class="col-2"></div>
-			<div class="col-8 text-end">
-					
-					<a class="btn btn-primary" href="/jspweb/main.jsp" role="button">home</a>
-					<a class="btn btn-primary" href="/jspweb/member/login.jsp" role="button">로그인</a>
-					<a class="btn btn-primary" href="/jspweb/member/signup.jsp"  role="button">회원가입</a>
-				
-			</div>
-			<div class="col-2 text-end"></div>
-		</div>
-	</div>
-	<% }else{ %>
-			<div class="container">
-		<div class="row">
-			<div class="col-2"></div>
-			<div class="col-8 text-end">
-					
-					<a class="btn btn-primary" href="/jspweb/main.jsp" role="button">home</a>
-					
-					<form action="loginout" method="get" style="display: inline-block;">
-					<input class="btn btn-primary" type="submit" value="로그아웃">
-					</form>				
-					
-					<a class="btn btn-primary" href="/jspweb/member/signup.jsp"  role="button">회원가입</a>
-				
-			</div>
-			<div class="col-2 text-end"></div>
-		</div>
-	</div>	
-	<%} %>
 	<!--   헤더페이지[ 모든 페이지 사용되기 때문에 = 최상위에서 절대경로 ] -->
 	
+	<%
+		String loginid 
+		= (String)session.getAttribute("login"); // 세션 호출 ( 기본타입 = Odject )
+	%>
+	<div class="container">
+		<!--  공통  -->
+		<a href="/jspweb/main.jsp">EZEN SHOP</a>
+		<a href="#"> BIG SIZE </a>
+		<a href="#"> MUSCLE-FIT </a>
+		<a href="#"> 1+1 이벤트 </a>
+		<a href="#"> 아우터 </a>
+		<a href="#"> 상의 </a>
+		<a href="#"> 바지 </a>
+		<a href="#"> 슈즈 </a>
+		<a href="#"> 악세사리 </a>
+		<a href="#"> BEST </a>
+		<a href="#"> 트레이닝 </a>
+		<a href="#"> 모델처러입자 </a>
+		<a href="#"> 50% 할인 </a>
+		<input type="text"><button>검색</button>
+		<a href="#"> <img src="#">장바구니이미지 </a>
+		<!--  로그인이 안된 상태 = 만약에 세션이 없으면  -->
+		<% if( loginid == null ){ %>
+			<a href="/jspweb/member/login.jsp">로그인</a>
+			<a href="/jspweb/member/signup.jsp">회원가입</a>
+		<%} %>
+		<!--  만약에 로그인된 상태 = 만약에 세션이 있으면 -->
+		<% if( loginid != null ){ %>
+			<span> <%=loginid %>님 </span>
+			<a href="/jspweb/logout">로그아웃</a>
+			<a href="/jspweb/member/myshopping.jsp">나의쇼핑</a>
+		<%} %>
+		<a href="#">고객센터</a>
+		
+	</div>
 	<!-- 부트스트랩 js cdn -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 	<!-- 사용자정의 js -->
