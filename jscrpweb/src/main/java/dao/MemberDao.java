@@ -133,7 +133,23 @@ public class MemberDao extends Dao {
 						ps.setInt( 6 , member.getMno() );
 				}
 					ps.executeUpdate(); return true;
-				}catch (Exception e) {} return false;
+				}catch (Exception e) {
+					System.out.println("[sql 에러]" + e);
+				} return false;
+		}
+		
+		public int getmno( String mid ) {
+			String sql = "select mno from member where mid = '"+mid+"'";
+			try {
+				ps = con.prepareStatement(sql);
+				rs = ps.executeQuery();
+				if(rs.next()) {
+					return rs.getInt(1);
+				}
+			} catch (Exception e) {
+				System.out.println("[sql 에러]" + e);
+			}
+			return -1;
 		}
 }
 
