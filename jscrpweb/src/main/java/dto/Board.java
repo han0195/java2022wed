@@ -1,29 +1,31 @@
 package dto;
 
 public class Board {
+	
 	private int bno;
 	private String btitle;
 	private String bcontent;
 	private int mno;
+	private String bfile;
 	private int bview;
 	private String bdate;
-	private String bfile;
+	private String mid;	/* 화면 표시용 */
 	
-	public Board() {
-		// TODO Auto-generated constructor stub
-	}
+	public Board() {}
 
-	public Board(int bno, String btitle, String bcontent, int mno, int bview, String bdate, String bfile) {
+	public Board(int bno, String btitle, String bcontent, int mno, String bfile, int bview, String bdate, String mid) {
 		super();
 		this.bno = bno;
 		this.btitle = btitle;
 		this.bcontent = bcontent;
 		this.mno = mno;
+		this.bfile = bfile;
 		this.bview = bview;
 		this.bdate = bdate;
-		this.bfile = bfile;
+		this.mid = mid;
 	}
 
+	// 필드 저장/호출 용 메소드 
 	public int getBno() {
 		return bno;
 	}
@@ -56,6 +58,14 @@ public class Board {
 		this.mno = mno;
 	}
 
+	public String getBfile() {
+		return bfile;
+	}
+
+	public void setBfile(String bfile) {
+		this.bfile = bfile;
+	}
+
 	public int getBview() {
 		return bview;
 	}
@@ -72,19 +82,20 @@ public class Board {
 		this.bdate = bdate;
 	}
 
-	public String getBfile() {
-		return bfile;
+	public String getMid() {
+		return mid;
 	}
 
-	public void setBfile(String bfile) {
-		this.bfile = bfile;
+	public void setMid(String mid) {
+		this.mid = mid;
 	}
 
+	// 객체 정보(필드정보) 출력 메소드 
 	@Override
 	public String toString() {
-		return "Board [bno=" + bno + ", btitle=" + btitle + ", bcontent=" + bcontent + ", mno=" + mno + ", bview="
-				+ bview + ", bdate=" + bdate + ", bfile=" + bfile + "]";
+		return "Board [bno=" + bno + ", btitle=" + btitle + ", bcontent=" + bcontent + ", mno=" + mno + ", bfile="
+				+ bfile + ", bview=" + bview + ", bdate=" + bdate + ", mid=" + mid + "]";
 	}
 	
-	
+
 }

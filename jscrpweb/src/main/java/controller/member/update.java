@@ -1,5 +1,4 @@
-package controller;
-
+package controller.member;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -82,3 +81,10 @@ public class update extends HttpServlet {
 	}
 
 }
+
+
+
+
+
+
+
