@@ -25,6 +25,7 @@
 		<h3>수정</h3>
 		<form action="updat" method="post"
 			enctype="multipart/form-data">
+			<input type="text" name="bno" style="display: none" value="<%=board.getBno()%>">
 			제목 : <input type="text" name="btitle" value="<%=board.getBtitle()%>"> <br>
 			<textarea name="bcontent" id="summernote"><%=board.getBcontent()%></textarea>
 			첨부파일 : <input type="file" name="bfile"><br> <input

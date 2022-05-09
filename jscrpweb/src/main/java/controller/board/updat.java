@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
+import dao.BoardDao;
+import dto.Board;
+
 /**
  * Servlet implementation class updat
  */
@@ -38,7 +41,7 @@ public class updat extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String uploadpath = request.getSession().getServletContext().getRealPath("/board/upload") ;
-
+		
 		// 첨부파일 업로드 [ MultipartRequest : cos 라이브러리 제공 클래스 ] 
 		MultipartRequest multi = new MultipartRequest(
 				request ,		// 1. 요청방식 
@@ -47,7 +50,27 @@ public class updat extends HttpServlet {
 				"UTF-8" ,		// 4. 인코딩타입 
 				new DefaultFileRenamePolicy() 	// 4. 보안방식 : 동일한 파일명이 있을경우 자동 이름 변환 
 		);	
+		int bno = Integer.parseInt(multi.getParameter("bno"));
 		String title = multi.getParameter("btitle");
+		if(title.equals("")) {
+			response.sendRedirect("/jspweb/error.jsp");
+		}else {
+			String bcontent = multi.getParameter("bcontent");
+			String bfile = multi.getFilesystemName("bfile");
+			
+			Board board = BoardDao.getBoardDao().getboard(bno);
+			board.setBtitle(title);
+			board.setBcontent(bcontent);
+			board.setBfile(bfile);
+		
+			boolean result = BoardDao.getBoardDao().update(board);
+			if(result) {
+				response.sendRedirect("boardview.jsp?bno="+bno);
+			}else {
+				System.out.println("error.jsp");
+			}
+		}
+		
 	}
 
 }
