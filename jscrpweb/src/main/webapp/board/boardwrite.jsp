@@ -2,6 +2,9 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+<style>
+*{font-size: 15px}
+</style>
 <head>
 
 	<!-- 게시판api( 썸머노트) css cdn -->

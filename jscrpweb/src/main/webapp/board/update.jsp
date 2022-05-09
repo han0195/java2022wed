@@ -4,6 +4,9 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+<style>
+*{font-size: 15px}
+</style>
 <head>
 <!-- 게시판api( 썸머노트) css cdn -->
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
@@ -28,7 +31,14 @@
 			<input type="text" name="bno" style="display: none" value="<%=board.getBno()%>">
 			제목 : <input type="text" name="btitle" value="<%=board.getBtitle()%>"> <br>
 			<textarea name="bcontent" id="summernote"><%=board.getBcontent()%></textarea>
-			첨부파일 : <input type="file" name="bfile"><br> <input
+			첨부파일 : <input type="file" name="bfile">
+			<%if(board.getBfile() == null){ %>
+			기존 파일: <a id="oldfile">없음</a> 
+			<%}else{ %>
+			기존 파일: <a href="#" id="oldfile"><%= board.getBfile() %></a> 
+			<%} %>	
+			<button type="button" onclick="filedelete(<%=board.getBno()%>)">파일삭제</button>
+			<br> <input
 				type="submit" value="등록"><input type="reset" value="취소">
 		</form>
 	</div>

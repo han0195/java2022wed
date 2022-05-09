@@ -11,13 +11,23 @@
 </head>
 <body>
 	<%@ include file="../header.jsp"%>
-	<div class="container">
-		<h3>게시판 상세</h3>
+	
 		<%
 		int bno = Integer.parseInt(request.getParameter("bno"));
-		Board board = BoardDao.getBoardDao().getboard(bno);
 		String mid = (String)session.getAttribute("login"); 
-		if(board.getMno() == MemberDao.getmemberDao().getmno(mid)){%>
+		if(session.getAttribute(mid+bno) == null){// 세션의 해당 mid+bno 이 없다면
+			// 조회수 증가처리
+			BoardDao.getBoardDao().increview(bno);
+		}
+		// 조회수 중복방지
+		session.setAttribute(mid+bno, true); // 세션명 : 아이디 + 게시물 번호
+		session.setMaxInactiveInterval(60*60*24); // 세션 제거 시간 24 시간
+		
+		Board board = BoardDao.getBoardDao().getboard(bno);
+		board.setMid(MemberDao.getmemberDao().getmid(board.getMno()));%>
+		<div class="container">
+		<h3>게시판 상세</h3>
+		<%if(board.getMno() == MemberDao.getmemberDao().getmno(mid)){%>		
 				<a href="delet?bno=<%= board.getBno()%>"> 삭제 </a>
 				<a href="update.jsp?bno=<%= board.getBno()%>"> 수정 </a>
 		<% } %>
@@ -43,7 +53,8 @@
 				<%if(board.getBfile() == null){%>
 				<td> 없어요</td>
 				<% }else{ %>
-				<td><a href="filedown?bfile=<%=board.getBfile()%>"> <%=board.getBfile()%></a>	</td>
+				<td><a href="filedown?bfile=<%=board.getBfile()%>"> <%=board.getBfile()%></a>
+				</td>	
 				<% } %>
 			</tr>
 

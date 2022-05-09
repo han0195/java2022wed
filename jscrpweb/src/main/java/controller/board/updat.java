@@ -1,5 +1,6 @@
 package controller.board;
 
+import java.io.File;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -59,10 +60,15 @@ public class updat extends HttpServlet {
 			String bfile = multi.getFilesystemName("bfile");
 			
 			Board board = BoardDao.getBoardDao().getboard(bno);
+			if(bfile != null) {
+				String uploadpath1 = request.getSession().getServletContext().getRealPath("/board/upload/" + board.getBfile());
+				File file = new File(uploadpath1);// 해당파일 객체화
+				file.delete(); // 파일삭제하기 (file 클래스내 제공되는 delete() 메소드)
+				board.setBfile(bfile);
+			}
 			board.setBtitle(title);
 			board.setBcontent(bcontent);
-			board.setBfile(bfile);
-		
+			
 			boolean result = BoardDao.getBoardDao().update(board);
 			if(result) {
 				response.sendRedirect("boardview.jsp?bno="+bno);

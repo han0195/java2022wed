@@ -1,4 +1,4 @@
-package dao;
+	package dao;
 
 import java.util.ArrayList;
 
@@ -87,8 +87,24 @@ public class BoardDao extends Dao {
 		}
 		return false; 
 	}
+	// 5-2 첨부파일만 삭제( null로 변경 ) 메소드 
+		public boolean filedelete( int bno ) {
+			String sql = "update board set bfile = null where bno = "+bno;
+			try { ps = con.prepareStatement(sql); ps.executeUpdate(); return true; }
+			catch (Exception e) {
+				System.out.println("sql 오류" + e);
+			} return false;
+		}
 	// 6. 게시물 조회 증가 메소드 	[ 인수 : 증가할 게시물번호 ]
-	public boolean increview( int bno ) { return false; }
+	public void increview( int bno ) {
+		String sql = "update board set bview = bview+1 where bno = "+bno;
+		try {
+			ps = con.prepareStatement(sql);
+			ps.executeUpdate();
+		} catch (Exception e) {
+			System.out.println("sql 오류" + e);
+		}
+	}
 	// 7. 댓글 작성 메소드 		[ 인수 : 작성된 데이터들 = dto ]
 	public boolean replywrite() { return false; }
 	// 8. 댓글 출력 메소드 		[ 인수 : x ]
