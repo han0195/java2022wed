@@ -45,7 +45,20 @@ public class BoardDao extends Dao {
 		return null;
 		}
 	// 3. 개별 게시물 출력 메소드 [ 인수 : 게시물번호 ]
-	public Board getboard() { return null; }
+	public Board getboard(int bno) {
+		String sql = "select * from board where bno='"+bno+"'";
+		try {
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				Board board = new Board(rs.getInt(1), rs.getString(2),rs.getString(3),rs.getInt(4),rs.getString(7),rs.getInt(5),rs.getString(6), null);
+				return board;
+			}
+		} catch (Exception e) {
+			System.out.println("sql 오류" + e);
+		}
+		return null;
+	}
 	// 4. 게시물 수정 메소드 	[ 인수 : 수정할 게시물번호  / 수정된 내용 ]
 	public boolean update( Board board ) { return false; }
 	// 5. 게시물 삭제 메소드 	[ 인수 : 삭제할 게시물번호 

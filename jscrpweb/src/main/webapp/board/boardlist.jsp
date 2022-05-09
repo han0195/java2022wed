@@ -36,7 +36,7 @@
 			%>
 				<tr>
 					<td> <%=board.getBno() %> </td>
-					<td> <a href="#" style="text-decoration: none;"><%=board.getBtitle() %></a></td>
+					<td> <a href="boardview.jsp?bno=<%= board.getBno() %>" style="text-decoration: none;"><%=board.getBtitle() %></a></td>
 					<%if(board.getMid() == null){%>
 					<td> 비회원 </td>
 					<% }else{ %>
@@ -46,10 +46,9 @@
 					<%
 					String formatDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 					String olddatea = board.getBdate();
-					String lsfo = olddatea.split(" ")[0];
-					String timd =  olddatea.split(" ")[1];
-					if(lsfo.equals(formatDate)){%>
-					<td> <%= timd%> </td>
+					String[] lsfo = olddatea.split(" ");
+					if(lsfo[0].equals(formatDate)){%>
+					<td> <%= lsfo[1]%> </td>
 					<% }else{ %>
 					<td> <%=board.getBdate() %> </td>
 					<%} %>			
