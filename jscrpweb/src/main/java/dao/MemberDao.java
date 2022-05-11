@@ -127,19 +127,13 @@ public class MemberDao extends Dao {
 		}
 		catch (Exception e) {} return 0;
 	}
-	//아이디 값 가져오기 
-	public String getmid(int mno) {
-		String sql = "select mid from member where mno = '"+mno+"'";
-		try {
-			ps = con.prepareStatement(sql);
-			rs = ps.executeQuery();
-			if(rs.next()) {
-				return rs.getString(1);
-			}
-		} catch (Exception e) {
-			System.out.println("[sql 오류]" + e);
+	// 회원id 출력 메소드 
+	public String getmid( int mno ) {
+		String sql = "select mid from member where mno = "+mno;
+		try { ps=con.prepareStatement(sql); rs=ps.executeQuery(); 
+			if(rs.next() ) return rs.getString( 1 ); 
 		}
-		return null;
+		catch (Exception e) {} return null;
 	}
 	
 }

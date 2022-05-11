@@ -12,14 +12,13 @@
 			<div class="col-md-3"> <!-- 사이드바 -->
 				<%@include file ="infosidebar.jsp" %>
 			</div>	
-			<div class="col-md-9 text-center"> <!-- 본문 -->
+			<div class="col-md-9"> <!-- 본문 -->
 				<h3>주문현황</h3>
-				
 			</div>
 		</div>
 	</div>
 	<%@include file = "../footer.jsp" %>
-<script src="/jspweb/js/myshopping.js" type="text/javascript"></script>
+
 </body>
 </html>
 
