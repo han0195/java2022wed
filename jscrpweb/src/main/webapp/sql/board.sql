@@ -30,3 +30,9 @@ SELECT * FROM BOARD WHERE btitle like '%d%';
  *  
  */
 /* DBMS 회사 마다 문법차이!!!  [ 수업: mysql , 외부평가 : 오라클 ] 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 

@@ -28,6 +28,9 @@ public class BoardDao extends Dao {
 	// 2-2 게시물 전체/검색 개수 출력 메소드 
 	public int gettotalrow( String key , String keyword  ) {
 		
+		// 만약에 작성자 요청이면 
+		if( key.equals("mid") ) { key = "mno"; keyword = MemberDao.getmemberDao().getmno(keyword)+""; }
+		
 		String sql = null;
 		if( key.equals("") && keyword.equals("") ) { sql ="select count(*) from board";} //검색이 없을경우 
 		else { sql ="select count(*) from board where "+key+" like '%"+keyword+"%'";} // 검색이 있을경우
@@ -42,6 +45,9 @@ public class BoardDao extends Dao {
 	public ArrayList<Board> getboardlist(int startrow , int listsize , String key , String keyword ) { 
 		ArrayList<Board> boardlist = new ArrayList<Board>();
 		String sql =  null;
+		
+		if( key.equals("mid") ) { key = "mno"; keyword = MemberDao.getmemberDao().getmno(keyword)+""; }
+		
 		if( key.equals("") && keyword.equals("") ) { //검색이 없을경우 
 			sql = "select * from board order by bno desc limit "+startrow+","+listsize; /* limit 시작 인덱스 , 표시 개수 */
 		}else {
@@ -174,4 +180,42 @@ public class BoardDao extends Dao {
 		}
 		catch( Exception e ) {} return false;
 	}
+	
+//////////////////////// day49_teamchatting /////////////////////////////////
+	public boolean send( String nicname , String content , String ip , String file  )  {
+		String sql = "insert into teamchatting(cnicname , ccontent ,ip,file )values(?,?,?,?)";
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setString( 1 , nicname ); ps.setString( 2 , content );  
+			ps.setString( 3 , ip );		ps.setString( 4 , file );
+			ps.execute(); return true;
+		}catch (Exception e) {} return false;
+	}
+	public String receive(  )  {
+		String receive = "";
+		String sql = "select * from teamchatting;";
+		try {
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while( rs.next() ) {
+				receive += rs.getString( 6 ) +"^"+
+						rs.getString( 5 ) +"^"+
+						rs.getString( 4 ) +"^"+
+						rs.getString( 2 ) +"^"+
+						rs.getString( 3 )+",";
+			}
+			return receive;
+		}catch (Exception e) {} return null;
+	}
+////////////////////////////////////////////////// /////////////////////////////////
 }
+
+
+
+
+
+
+
+
+
+

@@ -3,14 +3,12 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
 </head>
 <body>
 
-	<%@include file = "header.jsp" %>
-	<div class="container">
-		메인페이지
-	</div>
-	<%@include file = "footer.jsp" %>
+	<h3> 제품 목록 페이지 </h3>
 
 </body>
 </html>
