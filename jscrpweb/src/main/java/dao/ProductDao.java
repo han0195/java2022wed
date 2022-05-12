@@ -70,7 +70,10 @@ public class ProductDao extends Dao {
 		return false; 
 		}
 	// 2. 제품 모든 호출
-	public ArrayList<Product> getproductlist() { return null; }
+	public ArrayList<Product> getproductlist() {
+	
+		return null; 
+		}
 	// 3. 제품 개별 호출 
 	public Product getproduct() { return null; }
 	// 4. 제품 수정 

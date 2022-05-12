@@ -40,8 +40,7 @@ public class getcategory extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		String  html = "";
 		for( Category temp : arrayList) {
-			html += "<input type=\"radio\" name=\"cno\" value=\""+temp.getCno()+"\">"+temp.getCname(); // 응답할 문자열
-			
+			html += "<input type=\"radio\" id = \"con\" name=\"cno\" value=\""+temp.getCno()+"\">"+temp.getCname(); // 응답할 문자열
 		}
 		// java에서 " " : 문자열 인식용
 		//				\" : "표시출력
