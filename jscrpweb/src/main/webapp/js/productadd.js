@@ -7,6 +7,9 @@ function categorybtn(){
 	)
 }
 /* -----------------------------------------*/
+
+
+
 /* -------- 카테고리 등록 눌렀을때 함수(이벤트) ------- */
 function categoryadd(){
 	let cname = $("#cname").val();		/* 해당 입력값 가져오기 */ 
@@ -62,5 +65,21 @@ function productadd(){
 		}
 	});
 }
+/*---------------------------------------------------------------*/
+$("#pimg").change( function(e) {
+	
+	/* 클라이언트가 업롣시 업로드파일의 경로 읽기*/
+	let reader = new FileReader(); /*파일 경로 읽어오는 클래스*/
+	reader.readAsDataURL(e.target.files[0]); /* readAsDataURL(파일) : 해당 파일 경로찾기 */
+	reader.onload = function(e) { /* onload 통해 함수 실행 */
+	$("#preview").attr("src" , e.target.result);/* attr 속성값 고치기 ("속성", 값) */
+	}
+	/* 
+	클라이언트가 사진을 서버에 올릴때
+	 서버가 클라이언트의 경로를 알수가 없다.
+	*/
+})
+/* 첨부파일에 변경되면 특정태그에 첨부파일 이미지 표시 */
+
 
 

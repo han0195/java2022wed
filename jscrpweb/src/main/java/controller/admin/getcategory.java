@@ -39,8 +39,15 @@ public class getcategory extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
 		String  html = "";
+		int i = 1;
 		for( Category temp : arrayList) {
-			html += "<input type=\"radio\" id = \"con\" name=\"cno\" value=\""+temp.getCno()+"\">"+temp.getCname(); // 응답할 문자열
+			
+			if(i % 6 == 0) {
+				html += "<input type=\"radio\" id = \"con\" name=\"cno\" value=\""+temp.getCno()+"\">"+temp.getCname()+"\n";// 응답할 문자열
+			}else {
+				html += "<input type=\"radio\" id = \"con\" name=\"cno\" value=\""+temp.getCno()+"\">"+temp.getCname(); // 응답할 문자열
+			}
+			i++;
 		}
 		// java에서 " " : 문자열 인식용
 		//				\" : "표시출력
