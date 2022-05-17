@@ -28,15 +28,16 @@ public class activechange extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int active = Integer.parseInt(request.getParameter("active"));
-		int pno = Integer.parseInt(request.getParameter("pno"));
-		boolean result = ProductDao.getProductDao().activechange(active, pno);
-		if(result) {
-			response.getWriter().print(1);
-		}else {
-			response.getWriter().print(2);
-		}
-	
+		
+		// 변수 요청
+		int active  = Integer.parseInt( request.getParameter("active") );
+		int pno  = Integer.parseInt( request.getParameter("pno") );
+		// DB처리 
+		boolean result =  ProductDao.getProductDao().activechange( pno , active );
+		// DB 결과 처리
+		if( result ) { response.getWriter().print(1); }
+		else {  response.getWriter().print(2); }
+		
 	}
 
 	/**
