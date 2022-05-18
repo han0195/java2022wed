@@ -59,8 +59,13 @@ img{
 .pricebox{
 	font-size: 12px;
 }
-
-
+#btn1 {
+	background-color: black;
+	color: white; 
+}
+#btn3 {
+	color: red;
+}
 
 
 
