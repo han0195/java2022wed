@@ -1,7 +1,14 @@
 package dao;
 
 import java.util.ArrayList;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import com.mysql.cj.xdevapi.JsonArray;
+
 import controller.board.rereplywrite;
+import dto.Cart;
 import dto.Category;
 import dto.Product;
 import dto.Stock;
@@ -210,10 +217,71 @@ public class ProductDao extends Dao {
 				return true;
 			}
 		} catch (Exception e) {
+			System.out.println("ㅋㅋㅋㅋsef" + e);
+		}
+		return false;
+	}
+	 ////////////////////////장바구니///////////////////////
+	public boolean savecart(  Cart cart ) {
+		String sql = "select cartno from cart where sno= ? and mno= ?";
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, cart.getSno());
+			ps.setInt(2, cart.getMno());
+			rs = ps.executeQuery();
+			if(rs.next()) {	//1. 장바구니내 동일한 제품이 존재하면 수량 업데이트 처리
+				sql = "update cart set samount = samount + ?, totalprice = totalprice + ? where cartno=?";
+				ps = con.prepareStatement(sql);
+				ps.setInt(1, cart.getSamount());
+				ps.setInt(2, cart.getTotalprice());
+				ps.setInt(3, cart.getCartno());
+				ps.executeUpdate();return true;
+			}else {	//2. 존재하지않으면 등록
+				sql = "insert into cart(samount, totalprice, sno, mno)values(?,?,?,?)";
+				ps = con.prepareStatement(sql);
+				ps.setInt(1, cart.getSamount());
+				ps.setInt(2, cart.getTotalprice());
+				ps.setInt(3, cart.getSno());
+				ps.setInt(4, cart.getMno());
+				ps.executeUpdate();	return true;	
+			}	
+		} catch (Exception e) {
 			System.out.println("sef" + e);
 		}
 		return false;
 	}
-	 
-
+	
+	// 장바구니 출력 메소드 [  
+		public JSONArray getcart( int mno ) {
+			JSONArray jsonArray = new JSONArray(); // json배열 선언 
+			String sql = "select "
+					+ "	A.cartno as 장바구니번호 , "
+					+ "    A.samount as 구매수량 , "
+					+ "    A.totalprice as 총가격 , "
+					+ "    B.scolor as 색상 , "			
+					+ "    B.ssize as 사이즈 , "
+					+ "    B.pno as 제품번호 "
+					+ "from cart A "
+					+ "join stock B "
+					+ "on A.sno = B.sno "
+					+ "where mno = " + mno;
+			try {
+				ps = con.prepareStatement(sql);
+				rs = ps.executeQuery();
+				while( rs.next() ) {
+					// 결과내 하나씩 모든 레코드를 -> 하나씩 json객체 변환  
+					JSONObject object = new JSONObject();
+					object.put( "cartno" , rs.getInt(1) );
+					object.put( "samount" , rs.getInt(2) );
+					object.put( "totalprice" , rs.getInt(3) );
+					object.put( "scolor" , rs.getString(4) );
+					object.put( "ssize" , rs.getString(5) );
+					object.put( "pno" , rs.getInt(6) );
+					// 하나씩 json객체를 json배열에 담기 
+					jsonArray.put( object );
+				}
+				return jsonArray;
+			}catch (Exception e) { System.out.println( e );}  return null; 
+			
+		}
 }

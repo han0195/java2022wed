@@ -217,9 +217,10 @@ function savecart(mno) {
 				// [{ 키1:값 , 키2:값 , 키3:값}, { 키1:값 , 키2:값 , 키3:값}]
 	$.ajax({
 		url : "savecart",
-		data : { 'json' : JSON.stringify(selectlist) },
+		data : { 'json' : JSON.stringify(selectlist), 'pno' : $("#pno").val() },
 		success : function(re) {
-			alert('서블릿과 통신');
+			if(re == -1 ){alert('장바구니에 등록했습니다.')}
+			else{alert('오류발생[관리자에게문의] : ' +(re+1)+"옵션")}
 		}
 	});
 }
