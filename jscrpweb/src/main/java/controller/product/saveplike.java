@@ -29,11 +29,14 @@ public class saveplike extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int pno = Integer.parseInt(request.getParameter("pno"));
-		String mid = request.getParameter("mid");
-		int result = ProductDao.getProductDao().saveplike(pno, MemberDao.getmemberDao().getmno(mid));
-		//DB 결과 존재
-		response.getWriter().print(result);
+		int pno = Integer.parseInt( request.getParameter("pno") ) ;	// 제품번호 요청 
+		String mid = request.getParameter("mid"); // 회원아이디 요청 
+		// DB처리 
+		int result = ProductDao.getProductDao().saveplike( pno , MemberDao.getmemberDao().getmno(mid) );
+		// DB결과 JS 전달 
+		if( result == 1 ) { response.getWriter().print( result ) ; }
+		else if( result == 2 ) { response.getWriter().print( result ) ; }
+		else if( result == 3 ) { response.getWriter().print( result ) ; }
 	}
 
 	/**

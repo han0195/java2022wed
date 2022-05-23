@@ -8,10 +8,7 @@
 </head>
 <body>
 	<%@ include file="../header.jsp" %>
-	<div class="container">
-	
-	</div>
-	<script type="text/javascript" src="../js/productcart.js"></script>
+	<h3>결제성공</h3>
 	<%@ include file="../footer.jsp" %>
 </body>
 </html>
