@@ -7,6 +7,7 @@ import java.util.Arrays;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import controller.board.rereplywrite;
 import dto.Cart;
 import dto.Category;
 import dto.Order;
@@ -269,6 +270,65 @@ public class ProductDao extends Dao {
 			}
 		}catch (Exception e) { System.out.println( e ); }		
 		return false;
+	}
+	///////////////주문현황 구하기///////////////////////
+	public JSONArray getorder(int mno) {
+		String sql = "select "
+				+ "A.orderno as 주문번호 , "
+				+ "A.orderdate as 주문일 , "
+				+ "B.orderdetailno as 주문상세번호 , "
+				+ "B.orderdetailactive as 주문상세상태 , "
+				+ "B.samount as 주문상세수량 , "
+				+ "C.sno as 재고번호 , "
+				+ "C.scolor as 색상 , "
+				+ "C.ssize as 사이즈 , "
+				+ "D.pno as 제품번호 , "
+				+ "D.pname as 제품명 , "
+				+ "D.pimg as 제품사진 "
+				+ "from porder A join porderdetail B on A.orderno = B.orderno "
+				+ "join stock C on B.sno = C.sno "
+				+ "join product D on C.pno = D.pno where A.mno=? order by A.orderno asc;";
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, mno);
+			rs = ps.executeQuery();
+			
+			JSONArray array = new JSONArray(); // 상위리스트 [ 여러개의 하위 리스트 ]
+			JSONArray childlist = new JSONArray(); // 하위리스트	
+			int oldorderno = -1; // 이전 데이터의 주문번호 변수
+			while(rs.next()) {
+				JSONObject jsonObject = new JSONObject();
+				jsonObject.put("orderno",  rs.getInt(1));
+				jsonObject.put("orderdate",  rs.getString(2));
+				jsonObject.put("orderdetailno",  rs.getInt(3));
+				jsonObject.put("orderdetailactive",  rs.getInt(4));
+				jsonObject.put("samount",  rs.getInt(5));
+				jsonObject.put("sno",  rs.getInt(6));
+				jsonObject.put("scolor",  rs.getString(7));
+				jsonObject.put("ssize",  rs.getString(8));
+				jsonObject.put("pno",  rs.getInt(9));
+				jsonObject.put("pname",  rs.getString(10));
+				jsonObject.put("pimg",  rs.getString(11));
+				
+				// 동일한 주문번호 끼리 묶음 처리
+				// {키 : 값}
+				// {"orderno" : [ 키 : 값 , 키 : 값]}
+				
+				if(oldorderno == rs.getInt(1)) { // 이전 주문번호와 현재 주문번호 동일하면
+					// 하위 리스트에 데이터 담기
+					childlist.put(jsonObject); // 하위 리스트에 데이터 담기
+				}else { // 동일하지않으면
+					childlist = new JSONArray(); // 하위 리스트 초기화
+					childlist.put(jsonObject);	// 하위 리스트에 데이터담기
+					array.put(childlist);	// 상위 리스트에 하위 리스트 추가
+				}	
+				oldorderno = rs.getInt(1); // 이전 주문번호 변수에 현재 주문번호 넣기
+			}
+			return array;
+		} catch (Exception e) {
+			System.out.println("[SQL 오류]" +e);
+		}
+		return null;
 	}
 	
 	
