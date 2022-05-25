@@ -7,7 +7,6 @@ import java.util.Arrays;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import controller.board.rereplywrite;
 import dto.Cart;
 import dto.Category;
 import dto.Order;
@@ -271,67 +270,113 @@ public class ProductDao extends Dao {
 		}catch (Exception e) { System.out.println( e ); }		
 		return false;
 	}
-	///////////////주문현황 구하기///////////////////////
-	public JSONArray getorder(int mno) {
-		String sql = "select "
-				+ "A.orderno as 주문번호 , "
-				+ "A.orderdate as 주문일 , "
-				+ "B.orderdetailno as 주문상세번호 , "
-				+ "B.orderdetailactive as 주문상세상태 , "
-				+ "B.samount as 주문상세수량 , "
-				+ "C.sno as 재고번호 , "
-				+ "C.scolor as 색상 , "
-				+ "C.ssize as 사이즈 , "
-				+ "D.pno as 제품번호 , "
-				+ "D.pname as 제품명 , "
-				+ "D.pimg as 제품사진 "
-				+ "from porder A join porderdetail B on A.orderno = B.orderno "
-				+ "join stock C on B.sno = C.sno "
-				+ "join product D on C.pno = D.pno where A.mno=? order by A.orderno asc;";
+	
+	// 주문내역 메소드 
+	public JSONArray getorder( int mno) {
+		String sql ="SELECT "
+				+ "	A.orderno as 주문번호 , "
+				+ "    A.orderdate as 주문일 , "
+				+ "    B.orderdetailno as 주문상세번호 , "
+				+ "    B.orderdetailactive as 주문상세상태 , "
+				+ "    B.samount as 주문상세수량 , "
+				+ "    C.sno as 재고번호 , "
+				+ "    C.scolor as 색상 , "
+				+ "    C.ssize as 사이즈 , "
+				+ "    D.pno as 제품번호 , "
+				+ "    D.pname as 제품명 ,"
+				+ "    D.pimg as 제품사진 "
+				+ "FROM "
+				+ "porder A JOIN porderdetail B on A.orderno = B.orderno "
+				+ "JOIN STOCK C on B.sno = C.sno "
+				+ "JOIN product D ON C.pno = D.pno where A.mno = "+mno+" order by A.orderno desc;";
 		try {
 			ps = con.prepareStatement(sql);
-			ps.setInt(1, mno);
-			rs = ps.executeQuery();
+			rs = ps.executeQuery(); 
+			// 1. json 사용하는 이유 -> js로 전송하기위해 
+			// 2. Arraylist 사용하는 이유 -> jsp로 사용할려면 
 			
-			JSONArray array = new JSONArray(); // 상위리스트 [ 여러개의 하위 리스트 ]
-			JSONArray childlist = new JSONArray(); // 하위리스트	
-			int oldorderno = -1; // 이전 데이터의 주문번호 변수
-			while(rs.next()) {
+			JSONArray parentlist = new JSONArray();  // 상위 리스트 [ 여러개의 하위 리스트 ] 
+			
+			JSONArray childlist = new JSONArray();	// 하위 리스트 
+			
+			int oldorderno = -1; // 이전 데이터의 주문번호 변수 
+			
+			while( rs.next() ) {
+				// 데이터 json 객체
 				JSONObject jsonObject = new JSONObject();
-				jsonObject.put("orderno",  rs.getInt(1));
-				jsonObject.put("orderdate",  rs.getString(2));
-				jsonObject.put("orderdetailno",  rs.getInt(3));
-				jsonObject.put("orderdetailactive",  rs.getInt(4));
-				jsonObject.put("samount",  rs.getInt(5));
-				jsonObject.put("sno",  rs.getInt(6));
-				jsonObject.put("scolor",  rs.getString(7));
-				jsonObject.put("ssize",  rs.getString(8));
-				jsonObject.put("pno",  rs.getInt(9));
-				jsonObject.put("pname",  rs.getString(10));
-				jsonObject.put("pimg",  rs.getString(11));
+				jsonObject.put( "orderno" , rs.getInt( 1 ) ) ;
+				jsonObject.put( "orderdate" , rs.getString( 2 ) ) ;
+				jsonObject.put( "orderdetailno" , rs.getInt( 3 ) ) ;
+				jsonObject.put( "orderdetailactive" , rs.getInt( 4 ) ) ;
+				jsonObject.put( "samount" , rs.getInt( 5 ) ) ;
+				jsonObject.put( "sno" , rs.getInt( 6 ) ) ;
+				jsonObject.put( "scolor" , rs.getString( 7 ) ) ;
+				jsonObject.put( "ssize" , rs.getString( 8 ) ) ;
+				jsonObject.put( "pno" , rs.getInt( 9 ) ) ;
+				jsonObject.put( "pname" , rs.getString( 10 ) ) ;
+				jsonObject.put( "pimg" , rs.getString( 11 ) ) ;
 				
-				// 동일한 주문번호 끼리 묶음 처리
-				// {키 : 값}
-				// {"orderno" : [ 키 : 값 , 키 : 값]}
-				
-				if(oldorderno == rs.getInt(1)) { // 이전 주문번호와 현재 주문번호 동일하면
-					// 하위 리스트에 데이터 담기
-					childlist.put(jsonObject); // 하위 리스트에 데이터 담기
-				}else { // 동일하지않으면
-					childlist = new JSONArray(); // 하위 리스트 초기화
-					childlist.put(jsonObject);	// 하위 리스트에 데이터담기
-					array.put(childlist);	// 상위 리스트에 하위 리스트 추가
-				}	
-				oldorderno = rs.getInt(1); // 이전 주문번호 변수에 현재 주문번호 넣기
+				// 동일한 주문번호 이면 동일한 리스트에 담기 
+				//   {  키 : 값  }		
+				//   { 키 : [  ]  ,  키 : [  ]  , 키  , [ ] }
+				if( oldorderno == rs.getInt( 1 ) ){ // 이전 주문번호와 현재 주문번호 동일하면
+					childlist.put( jsonObject ); // 하위 리스트에 데이터 담기 
+				}else { // 동일하지 않으면
+					childlist = new JSONArray(); // 하위 리스트 초기화 
+					childlist.put( jsonObject ); // 하위 리스트에 데이터 담기 
+					parentlist.put( childlist ); // 상위 리스트에 하위 리스트 추가 
+				}
+				oldorderno = rs.getInt( 1 ); // 이전 주문번호 변수에 현재 주문번호 넣기 
 			}
-			return array;
-		} catch (Exception e) {
-			System.out.println("[SQL 오류]" +e);
-		}
-		return null;
+			return parentlist;
+		}catch (Exception e) { System.out.println( e );} return null;
 	}
 	
+	public boolean cancelorder( int orderdetailno , int active ) {
+		try {
+			String sql = " update porderdetail set orderdetailactive = "+active
+					+ " where orderdetailno = "+orderdetailno;
+			ps = con.prepareStatement(sql); ps.executeUpdate(); return true;
+		}catch (Exception e) { System.out.println( e ); } return false;
+	}
 	
+	public JSONArray getchart( int type  ) {
+		String sql ="";
+		JSONArray ja = new JSONArray();
+		
+		if( type == 1 ) { // 일별 매출 
+			sql ="SELECT "
+				+ "	substring_index( orderdate , ' ' , 1 ) AS 날짜 , "
+				+ "	sum( ordertotalpay ) "
+				+ "FROM porder "
+				+ "GROUP BY 날짜 ORDER BY 날짜 DESC";
+		}else if( type == 2 ) { // 카테고리별 전체 판매량 
+			sql = "select  "
+					+ "	sum( A.samount )  ,  "
+					+ "    D.cname "
+					+ "from porderdetail A, stock B , product C , category D  "
+					+ "where A.sno = B.sno and B.pno = C.pno and C.cno = D.cno  "
+					+ "group by D.cname "
+					+ "order by orderdetailno desc";
+		}
+		try {
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while( rs.next() ) {
+				JSONObject jo = new JSONObject();
+				if( type == 1 ) {
+					jo.put("date", rs.getString( 1 ) );
+					jo.put("value", rs.getString(2) );
+					ja.put(jo);
+				}else if( type == 2 ) {
+					jo.put("value", rs.getInt( 1 ) );
+					jo.put("category", rs.getString(2) );
+					ja.put(jo);
+				}
+			}
+			return ja;
+		}catch (Exception e) { System.out.println( e );} return null;
+	}
 }
 
 

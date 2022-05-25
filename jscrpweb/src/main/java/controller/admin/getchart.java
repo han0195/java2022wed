@@ -1,4 +1,4 @@
-package controller.product;
+package controller.admin;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -9,22 +9,19 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONArray;
 
-import com.mysql.cj.xdevapi.JsonArray;
-
-import dao.MemberDao;
 import dao.ProductDao;
 
 /**
- * Servlet implementation class getorder
+ * Servlet implementation class getchart
  */
-@WebServlet("/product/getorder")
-public class getorder extends HttpServlet {
+@WebServlet("/admin/getchart")
+public class getchart extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public getorder() {
+    public getchart() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,16 +31,13 @@ public class getorder extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String mid = (String)request.getSession().getAttribute("login");	
-		int mno = MemberDao.getmemberDao().getmno(mid);
+		int type = Integer.parseInt( request.getParameter("type") );
 		
 		JSONArray jsonArray 
-		= ProductDao.getProductDao().getorder( mno );
-		
+			= ProductDao.getProductDao().getchart( type );
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json");
-		response.getWriter().print(jsonArray);
-		
+		response.getWriter().print( jsonArray );
 		
 	}
 
